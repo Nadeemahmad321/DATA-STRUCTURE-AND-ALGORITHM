@@ -1,0 +1,90 @@
+// <--------------------stack implementation using array-------------------->
+
+#include<iostream>
+using namespace std;
+
+// defining stack
+class Stack{
+	public:
+		int *arr;
+		int size;
+		int top;
+		
+		// Constructer call
+		Stack(int size){
+			this->size=size;
+			arr=new int[size];
+			top=-1;	
+		}
+		
+		
+		// push element onto stack
+		void push(int element){
+			if(size - top > 1){
+				top++;
+				arr[top]=element;
+			}
+			else{
+				cout<<"stack is overFlow, warning!! you cannot push element onto stack."<<endl;
+			}
+		}
+		
+		// pop element from stack
+		void pop(){
+			if(top >= 0){
+				top--;
+			}
+			else{
+				cout<<"stack if underFlow, warning!! you cannot pop element from stack."<<endl;
+			}
+		}
+		
+		
+		// peek 
+		int peek(){
+			if(top >= 0 && top < size){
+				return arr[top];
+			}
+			else{
+				cout<<"stack isEmpty."<<endl;
+			}
+		}
+		
+		// stack isEmpty or not
+		bool isEmpty(){
+			if(top == -1){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		
+};
+int main(){
+	// creation of stack 
+	Stack st(5);
+	
+	
+	st.push(4);
+	cout<<"Top element of stack is:"<<st.peek()<<endl<<endl;
+	st.push(5);
+	cout<<"Top element of stack is:"<<st.peek()<<endl<<endl;
+	st.push(2);
+	cout<<"Top element of stack is:"<<st.peek()<<endl<<endl;
+	st.push(10);
+	cout<<"Top element of stack is:"<<st.peek()<<endl<<endl;
+	
+	st.pop();
+	cout<<"after popping element from stack."<<endl<<endl;
+	cout<<"Top element of stack is:"<<st.peek()<<endl<<endl;
+	
+	
+	
+	if(st.isEmpty()){
+		cout<<"stack is empty."<<endl<<endl;
+	}
+	else{
+		cout<<"stack is not Empty."<<endl<<endl;  
+	}
+}
