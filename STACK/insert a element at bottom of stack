@@ -1,0 +1,43 @@
+// <---------------insert a element bottom of stack------------------>
+
+#include<iostream>
+#include<stack>
+using namespace std;
+
+void solve(stack<int>&st,int x){
+	if(st.empty()){
+		st.push(x);
+		return;
+	}
+	
+	
+	int num=st.top();
+	st.pop();
+	
+	// Recursive call
+	solve(st,x);
+	
+	st.push(num);
+	
+}
+
+// inserting element onto stack
+stack<int> insertAtBottom(stack<int>&st,int x){
+	solve(st,x);
+	return st;
+}
+
+
+int main(){
+	stack<int>st;
+	st.push(10);
+	st.push(20);
+	st.push(30);
+	st.push(40);
+	st.push(50);
+	insertAtBottom(st,100);
+	for(int i=0;i<6;i++){
+		cout<<st.top()<<" ";
+		st.pop();
+	}
+}
