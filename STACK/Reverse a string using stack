@@ -1,4 +1,4 @@
-// <-----------Reverse a string using stack----------------->
+// <-----------Reverse a string using stack STL----------------->
 
 #include<iostream>
 #include<stack>
