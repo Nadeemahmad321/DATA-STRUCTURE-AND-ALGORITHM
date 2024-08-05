@@ -1,0 +1,74 @@
+// <-----------------------------Two stack---------------------------->
+
+#include<iostream>
+using namespace std;
+class twoStack{
+public:
+	int *arr;
+	int top1;
+	int top2;
+	int size;
+	twoStack(int size){
+		this->size=size;
+		top1=-1;
+		top2=size;
+		arr=new int[size];
+	}
+	
+	void push1(int element){
+		if(top2 - top1 >1){
+			top1++;
+			arr[top1]=element;
+		}
+		else{
+			cout<<"stack is overFlow."<<endl;
+		}
+	}
+	
+	void push2(int element){
+		if(top2 - top1 > 1){
+			top2--;
+			arr[top2]=element;
+		}
+		else{
+			cout<<"stack is overFlow."<<endl;
+		}
+	}
+	
+	int pop1(){
+		if(top1 >= 0){
+			int ans1=arr[top1];
+			top1--;
+			return ans1;
+		}
+		else{
+			cout<<"stack is underFlow."<<endl;
+		}
+	}
+	
+	int pop2(){
+		if(top2 < size){
+			int ans2=arr[top2];
+			top2++;
+			return ans2;
+		}
+		else{
+			cout<<"stack is underFlow."<<endl;
+		}
+	}
+};
+
+
+int main(){
+	twoStack st(5);
+	st.push1(4);
+	st.push1(3);
+	
+	int ans1=st.pop1();
+	cout<<"popped element from stack-1 is:"<<ans1<<endl;
+	
+	st.push2(8);
+	st.push2(10);
+	int ans2=st.pop2();
+	cout<<"popped element from stack-2 is:"<<ans2<<endl;	
+}
