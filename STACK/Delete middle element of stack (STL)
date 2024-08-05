@@ -1,0 +1,45 @@
+// <-----------------delete middle element of stack (STL)------------------->
+
+#include<iostream>
+#include<stack>
+using namespace std;
+void solve(stack<int> &inputStack,int count,int size){
+	// Base case
+	if(count == size/2){
+		inputStack.pop();
+		return ;
+	}
+	
+	// if count != size/2 
+	int num=inputStack.top();
+	inputStack.pop();
+	
+	// Recursive call
+	solve(inputStack,count+1,size);
+	
+	// push remaining popped element except middle element
+	inputStack.push(num);
+}
+
+// deleteMiddle element
+void deleteMiddle(stack<int> &inputStack,int n){
+	int count=0;
+	solve(inputStack,count,n);	
+}
+
+
+int main(){
+	stack<int>inputStack;
+	inputStack.push(30);
+	inputStack.push(40);  // if size is 4 (even) then 40 is delete
+	inputStack.push(50);
+	inputStack.push(60);
+	inputStack.push(70);
+	
+	deleteMiddle(inputStack,5);
+	
+	for(int i=0;i<4;i++){
+		cout<<inputStack.top()<<" ";
+		inputStack.pop();
+	}
+}
