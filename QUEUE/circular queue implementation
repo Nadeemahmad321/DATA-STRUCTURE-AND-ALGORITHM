@@ -30,6 +30,10 @@ class Queue{
 				arr[rear]=data;
 				
 			}
+			else if(rear == size-1 && qfront!=0){
+				rear=0;
+				arr[rear]=data;
+			}
 			else{
 				rear++;
 				arr[rear]=data;
@@ -38,7 +42,6 @@ class Queue{
 		
 		int pop(){
 			if(qfront == -1){
-//				cout<<"queue is already empty!"<<endl;
                 return false;
 			}
 			int ans =arr[qfront];
@@ -61,10 +64,10 @@ int main(){
 	Queue q(5);
 	
 	q.push(30);
-	q.push(40);
+	q.push(10);
 
 	int s=q.pop();
-	s=q.pop();
 	cout<<"popped element:"<<s<<endl;
+	s=q.pop();
 	cout<<"popped element:"<<s<<endl;
 }
