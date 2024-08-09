@@ -1,0 +1,34 @@
+// <----------------------QUEUE STL--------------------------->
+
+#include<iostream>
+#include<queue>
+using namespace std;
+int main(){
+	// creation of queue
+	queue<int>q;
+	
+	// push element in queue (push ->front) 
+	q.push(10);
+	
+	// checking front element of queue
+	cout<<"front of queue is:"<<q.front()<<endl;
+	q.push(20);
+	
+	// pop element from queue (pop ->rear)
+	q.pop();
+	
+	cout<<"front of queue is:"<<q.front()<<endl;
+	q.push(30);
+	cout<<"front of queue is:"<<q.front()<<endl;
+	
+	// size of queue
+	cout<<"size of queue is:"<<q.size()<<endl;
+	
+	// checking queue is empty or not
+	if(q.empty()){
+		cout<<"queue is empty!"<<endl;
+	}
+	else{
+		cout<<"queue is not empty!"<<endl;
+	}
+}
