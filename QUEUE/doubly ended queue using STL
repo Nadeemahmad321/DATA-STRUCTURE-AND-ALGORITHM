@@ -1,0 +1,42 @@
+// <------------------doubly endend queue STL-------------------------->
+
+
+#include<iostream>
+#include<deque>
+using namespace std;
+int main(){
+	// doubly endend queue creation
+	deque<int>d;
+	
+	// Add element from front 
+	d.push_front(10);
+	d.push_front(20);
+	
+	// checking front element
+	cout<<"front of queue:"<<d.front()<<endl;
+	
+	
+	// Add element front back
+	d.push_back(30);
+	
+	// checking back element
+	cout<<"back of queue:"<<d.back()<<endl;
+	
+	// Remove element from front
+	d.pop_front();
+	cout<<"after poping from front:"<<d.front()<<endl;
+	
+	// Remove element from back
+	d.pop_back();
+	cout<<"after popping from back:"<<d.back()<<endl;
+	
+	
+	// empty or not
+	if(d.empty()){
+		cout<<"queue is empty!"<<endl;
+	}
+	else{
+		cout<<"queue is not empty!"<<endl;
+	}
+	
+}
