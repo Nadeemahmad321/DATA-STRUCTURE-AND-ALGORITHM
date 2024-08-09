@@ -1,0 +1,46 @@
+// <---------------Reverse first K element of queue---------------->
+
+#include<iostream>
+#include<stack>
+#include<queue>
+using namespace std;
+int main(){
+	stack<int>s;
+	queue<int>q;
+	
+	q.push(10);
+	q.push(30);
+	q.push(12);
+	q.push(93);
+	q.push(31);
+	int k;
+	cout<<"enter the k:";
+	cin>>k;
+	
+	for(int i=0;i<k;i++){
+		int temp=q.front();
+		q.pop();
+		s.push(temp);
+	}
+	
+	for(int i=0;i<k;i++){
+		int temp=s.top();
+		s.pop();
+		q.push(temp);
+	}
+	
+	int t=q.size()-k;
+	while(t--){
+		int temp=q.front();
+		q.pop();
+		q.push(temp);
+	}
+	
+	for(int i=0;i<5;i++){
+		cout<<q.front()<<" ";
+		q.pop();
+	}
+	
+	
+	
+}
