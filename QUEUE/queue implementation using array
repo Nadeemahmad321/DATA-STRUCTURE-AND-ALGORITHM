@@ -1,0 +1,95 @@
+// <----------------------Queue Implementation using array---------------------->
+
+#include<iostream>
+using namespace std;
+
+class Queue{
+	public:
+		int *arr;
+	    int size;
+    	int qfront;
+    	int rear;
+    	
+    	// constructer call
+    	Queue(int size){
+    		this->size=size;
+    		arr=new int[size];
+    		qfront=0;
+    		rear=0;
+		}
+		
+		// Add element in queue
+		void push(int data){
+			if(rear == size){
+				cout<<"queue is full!"<<endl;
+			}
+			else{
+				arr[rear]=data;
+				rear++;
+			}
+		}
+		
+		
+		// Remove element from queue
+		int pop(){
+			if(rear == qfront){
+				cout<<"queue is empty!"<<endl;
+			}
+			else{
+				int ans=arr[qfront];
+				arr[qfront]=-1;
+				qfront++;
+				if(qfront == rear){
+					qfront=0;
+					rear=0;
+				}
+				return ans;
+			}
+			
+		}
+		
+		// checking qfront element of queue
+		int front(){
+			if(qfront == rear){
+				cout<<"queue is empty!"<<endl;
+			}
+			else{
+				return arr[qfront];
+			}
+		}
+		
+		// checking queue is empty or not
+		bool isEmpty(){
+			if(qfront == rear){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+	
+};
+int main(){
+	
+	Queue q(5);
+	
+	q.push(10);
+	q.push(20);
+	q.push(30);
+	
+	cout<<"front element of queue:"<<q.front()<<endl;
+	
+	q.pop();
+	
+	cout<<"after removing front element of queue!"<<endl;
+	
+	cout<<"front element of queue:"<<q.front()<<endl;
+	
+	
+	if(q.isEmpty()){
+		cout<<"queue is empty!"<<endl;
+	}
+	else{
+		cout<<"queue is not empty!"<<endl;
+	}
+}
