@@ -1,0 +1,68 @@
+// <------------ interleave the first half of the queue with second half---------------->
+
+#include<iostream>
+#include<stack>
+#include<queue>
+using namespace std;
+int main(){
+	
+	// creation of queue
+	queue<int>q;
+	
+	// creation of stack
+	stack<int>s;
+	
+	q.push(11);
+	q.push(12);
+	q.push(13);
+	q.push(14);
+	q.push(15);
+	q.push(16);
+	q.push(17);
+	q.push(18);
+	q.push(19);
+	q.push(20);
+	
+	// push first half element of queue onto stack
+	for(int i=0;i<5;i++){
+		int temp=q.front();
+		q.pop();
+		s.push(temp);
+	}
+	
+	// element of stack push in queue
+	while(!s.empty()){
+		int temp=s.top();
+		s.pop();
+		q.push(temp);
+	}
+	
+	// push first half of queue in queue
+	for(int i=0;i<5;i++){
+		int temp=q.front();
+		q.pop();
+		q.push(temp);
+	}
+	
+	// again push first half of queue in stack
+	for(int i=0;i<5;i++){
+		int temp=q.front();
+		q.pop();
+		s.push(temp);
+	}
+	
+	// push first element of stack in queue and then push first element of queue in queue 
+	while(!s.empty()){
+		int temp=s.top();
+		s.pop();
+		q.push(temp);
+		temp=q.front();
+		q.pop();
+		q.push(temp);
+	}
+	
+	for(int i=0;i<10;i++){
+		cout<<q.front()<<" ";
+		q.pop();
+	}
+}
