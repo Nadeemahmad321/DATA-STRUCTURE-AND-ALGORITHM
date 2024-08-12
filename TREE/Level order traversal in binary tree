@@ -1,0 +1,100 @@
+// <--------------Level order traversal in binary tree---------------->
+
+#include<iostream>
+#include<queue>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+// building tree
+Node* buildBinaryTree(Node* root){
+	
+	// data for node
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	
+	//creation of root with data
+	root=new Node(data);
+	
+	// we dont want to insert element anymore in a node
+	if(data==-1){
+		return NULL;
+	}
+	
+	// recursive call for left and right node
+	cout<<"Enter the data for inserting in left of:"<<data<<endl;
+	root->left=buildBinaryTree(root->left);
+	
+	cout<<"Enter the data for inserting in right of:"<<data<<endl;
+	root->right=buildBinaryTree(root->right);
+	
+	return root;	
+}
+
+// level order traversal in binary tree
+void levelOrderTraversal(Node* root){
+	
+	if(root ==  NULL){
+		return ;
+	}
+	
+	// creation of queue
+	queue<Node*>q;
+	
+	// push root element in queue
+	q.push(root);
+	
+	// null is push in queue only for enter purpose
+	q.push(NULL);
+	
+	while(!q.empty()){
+		Node* temp=q.front();
+		q.pop();
+		
+		if(temp == NULL){
+			cout<<endl;
+			if(!q.empty()){
+				q.push(NULL);
+			}
+		}
+		else{
+			cout<<temp->data<<" ";
+			
+			// if left is available then push into queue
+			if(temp->left){
+				q.push(temp->left);
+			}
+			
+			//  if right is available then push into queue
+			if(temp->right){
+				q.push(temp->right);
+			}
+		}
+	}
+	
+	
+}
+
+// main function
+int main(){
+	// creation of root with NULL value
+	Node* root=NULL;
+	
+	// creation of tree
+	root=buildBinaryTree(root);
+	
+	// level order traversal
+	cout<<"printing level order traversal"<<endl;
+	levelOrderTraversal(root);
+}
