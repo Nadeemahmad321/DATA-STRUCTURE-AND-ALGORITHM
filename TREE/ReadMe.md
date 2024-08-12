@@ -58,16 +58,6 @@ In post-order traversal, the nodes are recursively visited in this order: left c
 Level-order traversal visits each level of the tree from top to bottom and left to right. This is typically implemented using a queue.
 
 
-## Installation
-
-To use this implementation, clone the repository and compile the code using a C++ compiler. You can use `g++` as follows:
-
-```bash
-git clone https://github.com/yourusername/tree-data-structure.git
-cd tree-data-structure
-g++ main.cpp -o tree
-```
-
 
 ## Contributing
 
