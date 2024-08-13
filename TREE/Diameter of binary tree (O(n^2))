@@ -1,0 +1,79 @@
+// <------------------------Diameter of binary tree------------------>
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+    	int data;
+    	Node* left;
+    	Node* right;
+    	
+    public:
+    	Node(int data){
+    		this->data=data;
+    		this->left=NULL;
+    		this->right=NULL;
+		}
+};
+
+Node* buildTree(Node* root){
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	
+	root=new Node(data);
+	if(data == -1){
+		return NULL;
+	}
+	
+	cout<<"Enter the left node of:"<<root->data<<endl;
+	root->left=buildTree(root->left);
+	
+	cout<<"Enter the right node of:"<<root->data<<endl;
+	root->right=buildTree(root->right);
+	
+	return root;
+}
+
+
+// Height of tree
+int height(Node* root){
+	if(root == NULL){
+		return 0;
+	}
+	
+	int left=height(root->left);
+	int right=height(root->right);
+	
+	int ans=max(left,right)+1;
+	return ans;
+}
+
+// diameter of binary tree
+int diameter(Node* root){
+	if(root == NULL){
+		return 0;
+	}
+	
+	int op1=diameter(root->left);
+	int op2=diameter(root->right);
+	
+	// this process take O(n^2) time complexity because height is also called
+	int op3=height(root->left)+height(root->right)+1;
+	int ans=max(op1,max(op2,op3));
+	return ans;
+}
+
+int main(){
+	
+	Node* root=NULL;
+	
+	root=buildTree(root);
+	
+	int ans=diameter(root);
+	cout<<"diameter of binary tree:"<<ans<<endl;
+	
+	
+	
+}
