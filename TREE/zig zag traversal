@@ -1,0 +1,88 @@
+// <-------------zig zag traversal------------------>
+
+#include<iostream>
+#include<queue>
+#include<vector>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+			
+		}
+};
+
+// building tree
+Node* buildTree(Node* root){
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	
+	root=new Node(data);
+	
+	if(data == -1){
+		return NULL;
+	}
+	
+	cout<<"Enter the node left of:"<<root->data<<endl;
+	root->left=buildTree(root->left);
+	cout<<"Enter the node right of:"<<root->data<<endl;
+	root->right=buildTree(root->right);
+	
+	return root;
+}
+
+// zigZag traversal
+vector<int> zigZagTraversal(Node* root){
+	vector<int>result;
+	if(root == NULL){
+		return result;
+	}
+	
+	queue<Node*>q;
+	q.push(root);
+	
+	bool leftToRight=true;
+	
+	while(!q.empty()){
+		int size=q.size();
+		vector<int>ans(size);
+		for(int i=0;i<size;i++){
+			Node* frontNode=q.front();
+	    	q.pop();
+	    	
+	    	int index=leftToRight ? i: size-i-1;
+	    	ans[index]=frontNode->data;
+	    	if(frontNode->left){
+	    		q.push(frontNode->left);
+			}
+			if(frontNode->right){
+				q.push(frontNode->right);
+			}
+		}
+		leftToRight=!leftToRight;
+		for(auto i:ans){
+			result.push_back(i);
+		}
+			
+	}
+	return result;
+}
+
+
+int main(){
+	Node* root=NULL;
+	
+	root=buildTree(root);
+	
+	vector<int> ans=zigZagTraversal(root);
+	for(int i=0;i<ans.size();i++){
+		cout<<ans[i]<<" ";
+	}
+}
