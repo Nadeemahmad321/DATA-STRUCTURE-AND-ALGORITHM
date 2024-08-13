@@ -1,0 +1,65 @@
+// <-----------------Height of binary tree--------------->
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+    	int data;
+    	Node* left;
+    	Node* right;
+    	
+    public:
+    	Node(int data){
+    		this->data=data;
+    		this->left=NULL;
+    		this->right=NULL;
+		}
+	
+};
+
+Node* buildTree(Node* root){
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	
+	root=new Node(data);
+	if(data == -1){
+		return NULL;
+	}
+	
+	cout<<"Enter the left node of:"<<root->data<<endl;
+	root->left=buildTree(root->left);
+	
+	cout<<"Enter the right node of:"<<root->data<<endl;
+	root->right=buildTree(root->right);
+	
+	return root;
+	
+	
+}
+
+
+// Height of tree
+int height(Node* root){
+	if(root == NULL){
+		return 0;
+	}
+	
+	int left=height(root->left);
+	int right=height(root->right);
+	
+	int ans=max(left,right)+1;
+	return ans;
+}
+
+int main(){
+	
+	Node* root=NULL;
+	
+	root=buildTree(root);
+	
+	// height of tree
+	int ans=height(root);
+	cout<<"height of tree is:"<<ans<<endl;
+	
+}
