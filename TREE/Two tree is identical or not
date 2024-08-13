@@ -1,0 +1,82 @@
+// <------------Determine if two trees are identical-------------->
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+    	int data;
+    	Node* left;
+    	Node* right;
+    	
+    public:
+    	Node(int data){
+    		this->data=data;
+    		this->left=NULL;
+    		this->right=NULL;
+		}
+};
+
+Node* buildTree(Node* root1){
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	
+	root1=new Node(data);
+	if(data == -1){
+		return NULL;
+	}
+	
+	cout<<"Enter the left node of:"<<root1->data<<endl;
+	root1->left=buildTree(root1->left);
+	
+	cout<<"Enter the right node of:"<<root1->data<<endl;
+	root1->right=buildTree(root1->right);
+	
+	return root1;
+}
+
+// two tree is identical or not
+bool isIdentical(Node* root1, Node* root2){
+	if(root1 == NULL && root1 ==NULL){
+		return true;
+	}
+	if(root1 == NULL && root2 != NULL){
+		return false;
+	}
+	if(root1 != NULL && root2 == NULL){
+		return NULL;
+	}
+	
+	bool left=isIdentical(root1->left,root2->left);
+	bool right=isIdentical(root1->right,root2->right);
+	
+	bool value=root1->data == root2->data;
+	if(left && right && value){
+		return true;
+	}
+	else{
+		return false;
+	}
+	
+}
+
+
+int main(){
+	
+	Node* root1=NULL;
+	
+	root1=buildTree(root1);
+	
+	Node* root2=NULL;
+	cout<<"Enter the data for second tree:"<<endl;
+	root2=buildTree(root2);
+	
+	// function call
+	if(isIdentical(root1,root2)){
+		cout<<"Tree is identical."<<endl;
+	}
+	else{
+		cout<<"Tree is not identical."<<endl;
+	}	
+}
