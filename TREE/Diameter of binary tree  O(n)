@@ -1,0 +1,90 @@
+// <------------------------Diameter of binary tree  O(n)------------------>
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+    	int data;
+    	Node* left;
+    	Node* right;
+    	
+    public:
+    	Node(int data){
+    		this->data=data;
+    		this->left=NULL;
+    		this->right=NULL;
+		}
+};
+
+Node* buildTree(Node* root){
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	
+	root=new Node(data);
+	if(data == -1){
+		return NULL;
+	}
+	
+	cout<<"Enter the left node of:"<<root->data<<endl;
+	root->left=buildTree(root->left);
+	
+	cout<<"Enter the right node of:"<<root->data<<endl;
+	root->right=buildTree(root->right);
+	
+	return root;
+}
+
+
+// Height of tree
+int height(Node* root){
+	if(root == NULL){
+		return 0;
+	}
+	
+	int left=height(root->left);
+	int right=height(root->right);
+	
+	int ans=max(left,right)+1;
+	return ans;
+}
+
+// diameter fast
+pair<int,int> diameterFast(Node* root){
+	if(root == NULL){
+		pair<int,int>p=make_pair(0,0);
+		return p;
+	}
+	
+	pair<int,int> left=diameterFast(root->left);
+	pair<int,int> right=diameterFast(root->right);
+	
+	int op1=left.first;
+	int op2=right.first;
+	int op3=left.second + right.second + 1;
+	
+	pair<int,int>ans;
+	ans.first=max(op1,max(op2,op3));
+	ans.second=max(left.second,right.second) + 1;
+	return ans;
+}
+
+
+// diameter of binary tree
+int diameter(Node* root){
+	return diameterFast(root).first;
+}
+
+int main(){
+	
+	Node* root=NULL;
+	
+	root=buildTree(root);
+	
+	int ans=diameter(root);
+	cout<<"diameter of binary tree:"<<ans<<endl;
+	
+	
+	
+}
