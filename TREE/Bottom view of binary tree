@@ -78,7 +78,7 @@ int main(){
 	
 	root=buildTree(root);
 	
-	// Top view of binary tree
+	// Bottom view of binary tree
 	vector<int>ans=bottomView(root);
 	for(int i=0;i<ans.size();i++){
 		cout<<ans[i]<<" ";
