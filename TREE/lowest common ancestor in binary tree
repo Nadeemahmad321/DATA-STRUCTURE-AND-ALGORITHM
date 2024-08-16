@@ -1,0 +1,78 @@
+// <------------lowest common ancestor in binary tree--------------->
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+    	Node* left;
+    	Node* right;
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+	
+};
+// Lowest common ancestor
+Node* lowestCommonAncestor(Node* root,int n1,int n2){
+	if(root == NULL){
+		return NULL;
+	}
+	
+	if(root->data == n1 || root->data == n2){
+		return root;
+	}
+	
+	Node* leftAns=lowestCommonAncestor(root->left,n1,n2);
+	Node* rightAns=lowestCommonAncestor(root->right,n1,n2);
+	
+	if(leftAns !=NULL && rightAns != NULL){
+		return root;
+	}
+	else if(leftAns == NULL && rightAns !=NULL){
+		return rightAns;
+	}
+	else if(leftAns != NULL && rightAns == NULL){
+		return leftAns;
+	}
+	else{
+		return NULL;
+	}
+}
+Node* buildTree(Node* root){
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	root=new Node(data);
+	if(data == -1){
+		return NULL;
+	}
+	
+	cout<<"enter the left node of:"<<root->data<<endl;
+	root->left=buildTree(root->left);
+	cout<<"Enter the right node of:"<<root->data<<endl;
+	root->right=buildTree(root->right);
+	
+	return root;
+}
+int main(){
+	Node* root=NULL;
+	root=buildTree(root);
+	
+	cout<<"Enter the N1:";
+	int N1;
+	cin>>N1;
+	
+	
+	cout<<"Enter the N2:";
+	int N2;
+	cin>>N2;
+	
+	// lowest common ancestor
+	Node* ans=lowestCommonAncestor(root,N1,N2);
+	cout<<ans->data<<endl;
+	
+}
