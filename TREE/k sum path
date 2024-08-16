@@ -1,0 +1,80 @@
+// <-----------k sum path-------------->
+
+#include<iostream>
+#include<vector>
+using namespace std;
+class Node{
+	public:
+		int data;
+    	Node* left;
+    	Node* right;
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+	
+};
+
+Node* buildTree(Node* root){
+	cout<<"Enter the data:";
+	int data;
+	cin>>data;
+	root=new Node(data);
+	if(data == -1){
+		return NULL;
+	}
+	
+	cout<<"enter the left node of:"<<root->data<<endl;
+	root->left=buildTree(root->left);
+	cout<<"Enter the right node of:"<<root->data<<endl;
+	root->right=buildTree(root->right);
+	
+	return root;
+}
+
+void solve(Node* root,int k,int &count,vector<int>path){
+	if(root == NULL){
+		return;
+	}
+	
+	path.push_back(root->data);
+	
+	solve(root->left,k,count,path);
+	solve(root->right,k,count,path);
+	
+	int size=path.size();
+	int sum=0;
+	
+	for(int i=size-1;i>=0;i--){
+		sum+=path[i];
+		if(sum == k){
+			count++;
+		}
+	}
+	path.pop_back();
+	
+}
+
+// k sum path
+int sumK(Node* root,int k){
+	vector<int>path;
+	int count=0;
+	solve(root,k,count,path);
+	return count;
+	
+}
+int main(){
+	Node* root=NULL;
+	root=buildTree(root);
+	
+	cout<<"Enter the value of k:";
+	int k;
+	cin>>k;
+	int ans=sumK(root,k);
+	cout<<"no of path is:"<<ans<<endl;
+	
+
+	
+}
