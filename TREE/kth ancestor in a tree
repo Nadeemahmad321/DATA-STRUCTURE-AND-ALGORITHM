@@ -69,7 +69,7 @@ Node* solve(Node* root,int &k,int n){
 // kth ancestor in tree
 int KthAncestor(Node* root,int k,int n){
 	Node* ans=solve(root,k,n);
-	if(ans == NULL){
+	if(ans == NULL || ans->data == n){
 		return -1;
 	}
 	else{
