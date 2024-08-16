@@ -1,0 +1,76 @@
+/* construct a tree from inorder and preorder traversal */
+
+#include<iostream>
+using namespace std;
+
+class Node{
+	public:
+	int data;
+	Node* left;
+	Node* right;
+	Node(int data){
+		this->data=data;
+		this->left=NULL;
+		this->right=NULL;
+	}
+};
+
+
+int findPosition(int inorder[],int element,int n){
+	for(int i=0;i<n;i++){
+		if(inorder[i] == element){
+			return i;
+		}
+	}
+	return -1;
+}
+
+
+
+Node* solve(int inorder[],int preorder[],int &index,int inOrderStart,int inOrderEnd,int n){
+	if(index >= n || inOrderStart > inOrderEnd){
+		return NULL;
+	}
+	
+	int element=preorder[index++];
+	Node* root=new Node(element);
+	
+	int position=findPosition(inorder,element,n);
+	
+	root->left=solve(inorder,preorder,index,inOrderStart,position-1,n);
+	root->right=solve(inorder,preorder,index,position+1,inOrderEnd,n);
+	
+	return root;
+	
+}
+
+// building tree
+Node* buildTree(int inorder[],int preorder[],int n){
+	int preOrderIndex=0;
+	Node* ans=solve(inorder,preorder,preOrderIndex,0,n-1,n);
+	return ans;
+}
+
+
+void postOrderPrint(Node* ans){
+	if(ans==NULL){
+		return ;
+		
+	}
+	
+	postOrderPrint(ans->left);
+	postOrderPrint(ans->right);
+	cout<<ans->data<<" ";
+}
+
+
+int main(){
+	
+	int inorder[6]={3,1,4,0,5,2};
+	int preorder[6]={0,1,3,4,2,5};
+	int n=6;
+	
+	Node* ans=buildTree(inorder,preorder,n);
+	postOrderPrint(ans);
+
+}
