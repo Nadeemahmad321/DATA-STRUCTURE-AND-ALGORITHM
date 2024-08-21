@@ -6,9 +6,9 @@ using namespace std;
 class Queue{
 	public:
 		int *arr;
-	    int size;
-    	int qfront;
-    	int rear;
+	        int size;
+    	        int qfront;
+    	        int rear;
     	
     	// constructer call
     	Queue(int size){
