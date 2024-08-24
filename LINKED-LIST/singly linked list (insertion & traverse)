@@ -1,0 +1,141 @@
+/*  <--------------------Singly Linked List---------------------->
+
+1) : traversing singly list
+2) : inserting node at head
+3) : inserting node at tail
+4) : inserting node at any position 
+(handling all cases like 1st position insertion , last position insertion)  */
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+
+// <--------------------------inserting node at head in linked list------------------->
+void insertAtHead(Node* &tail,Node* &head,int data){
+	
+	// whenever there is no node is present
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	// whenever there is atleast one node is node is present
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head=temp;
+	}	
+}
+
+// <--------------------------------inserting at tail--------------------------------->
+void insertAtTail(Node* &tail,Node* &head,int data){
+	// whenever there is no node is present
+	if(tail == NULL){
+		Node* temp=new Node(data);
+		tail=temp;
+		head=temp;
+	}
+	
+	// whenever there is atleast one node is node is present
+	else{
+		Node* temp=new Node(data);
+		tail->next=temp;
+		tail=temp;
+	}
+}
+
+// <------------------------insert at any position------------------------------>
+void insertAtAnyPosition(Node* &tail,Node* &head,int data,int position){
+	
+	// inserting at first position
+	if(position == 1){
+		insertAtHead(tail,head,data);
+		return;
+	}
+	
+	// inserting at middle or any position
+	int count=1;
+	Node* temp=head;
+	
+	while(count < position-1){
+		temp=temp->next;
+		count++;
+	}
+	
+	// inserting at last position
+	if(temp->next == NULL){
+		insertAtTail(tail,head,data);
+		return;
+	}
+	
+	
+	Node* nodeToInsert=new Node(data);
+	nodeToInsert->next=temp->next;
+	temp->next=nodeToInsert;
+}
+
+// <------------------------traversing linked list----------------------------->
+void print(Node* &head){
+	Node* temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+
+
+int main(){
+	
+	// whenever head is null , it means there is no node is currently present
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	// insert node at head
+	insertAtHead(tail,head,20);
+	cout<<"inserting at head:";
+	
+	// traversing head
+	print(head);
+	cout<<endl;
+	
+	insertAtHead(tail,head,30);
+	cout<<"inserting at head:";
+	print(head);
+	cout<<endl;
+	
+	// inserting node at tail
+	insertAtTail(tail,head,40);
+	cout<<"inserting at tail:";
+	print(head);
+	cout<<endl;
+	
+	insertAtTail(tail,head,80);
+	cout<<"inserting at tail:";
+	print(head);
+	cout<<endl;
+	
+	insertAtAnyPosition(tail,head,50,2);
+	cout<<"inserting at Position 2nd:";
+	print(head);
+	cout<<endl;
+	
+	insertAtAnyPosition(tail,head,60,6);
+	cout<<"inserting at Position 6th:";
+	print(head);
+	cout<<endl;
+	
+	insertAtAnyPosition(tail,head,600,1);
+	cout<<"inserting at Position 1st:";
+	print(head);
+	cout<<endl;	
+}
