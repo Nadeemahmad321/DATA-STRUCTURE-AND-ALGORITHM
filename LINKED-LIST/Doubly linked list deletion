@@ -1,0 +1,109 @@
+/* <-------------------------doubly linked list------------------------------->
+
+deleting node from any postion in doubly linked list */
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+		Node* prev;
+	
+	public:
+		// constructor
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+			this->prev=NULL;
+		}
+		
+		// destructor
+		~Node(){
+			int value=this->data;
+			while(this->next != NULL){
+				delete next;
+				this->next=NULL;
+			}
+			cout<<"memory is free for node with data:"<<value<<endl;
+		}
+};
+
+
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head->prev=temp;
+		head=temp;
+	}
+}
+
+// deleting node from any position in doubly linked list
+void deleteNodeFromAnyPosition(Node* &head,int position){
+	if(position == 1){
+		Node* temp=head;
+		temp->next->prev=NULL;
+		head=temp->next;
+		temp->next=NULL;
+		delete temp;
+	}
+	else{
+		Node* curr=head;
+		Node* prev=NULL;
+		
+		int count=1;
+		while(count < position){
+			prev=curr;
+			curr=curr->next;
+			count++;
+		}
+		
+		curr->prev=NULL;
+		prev->next=curr->next;
+		curr->next->prev=prev;
+		curr->next=NULL;
+		
+		delete curr;
+	}
+}
+
+void print(Node* &head){
+	Node* temp=head;
+	while(temp != NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+int main(){
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	insertAtHead(tail,head,10);
+	cout<<"insert node at head:";
+	print(head);
+	
+	insertAtHead(tail,head,20);
+	cout<<"insert node at head:";
+	print(head);
+	
+	insertAtHead(tail,head,30);
+	cout<<"insert node at head:";
+	print(head);
+	
+	insertAtHead(tail,head,40);
+	cout<<"insert node at head:";
+	print(head);
+	
+	deleteNodeFromAnyPosition(head,1);
+	cout<<"after deleting:";
+	print(head);
+	
+}
