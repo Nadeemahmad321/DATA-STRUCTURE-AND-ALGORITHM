@@ -1,0 +1,97 @@
+/*  <--------------------Singly Linked List---------------------->
+deleting node from any position */ 
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		// constructor
+		Node(int data){
+			this->data=data;
+			this->next=NULL;	
+		}
+		
+		// destructor
+		~Node(){
+			int value=this->data;
+			if(this->next != NULL){
+				delete next;
+				this->next=NULL;
+			}
+			cout<<"memory is free for node with data:"<<value<<endl;
+		}
+	
+};
+
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head=temp;
+	}
+}
+
+// delete element from any position
+void deleteAtAnyPosition(Node* &tail,Node* head,int position){
+	if(position == 1){
+		Node* temp=head;
+		head=head->next;
+		temp->next=NULL;
+		delete temp;
+	}
+	else{
+		Node* prev=NULL;
+		Node* curr=head;
+		
+		int count=1;
+		while(count < position){
+			prev=curr;
+			curr=curr->next;
+			count++;
+		}
+		prev->next=curr->next;
+		curr->next=NULL;
+		delete curr;
+	}
+	
+	
+}
+void print(Node* head){
+	Node* temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+
+int main(){
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	insertAtHead(tail,head,10);
+	print(head);
+	insertAtHead(tail,head,3);
+	print(head);
+	insertAtHead(tail,head,5);
+	print(head);
+	insertAtHead(tail,head,9);
+	print(head);
+	
+	// deleting node from any position
+	deleteAtAnyPosition(tail,head,1);
+	print(head);
+	
+	
+	
+}
