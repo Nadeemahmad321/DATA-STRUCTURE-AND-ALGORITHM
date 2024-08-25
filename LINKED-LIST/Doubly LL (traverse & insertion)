@@ -1,0 +1,153 @@
+/* <----------------------Doubly linked list------------------------->
+
+
+Note:-> doubly linked list consist three field , 
+1st field contain address of previous node(or NULL) , 
+2nd field contain data and the 3rd field contain address of next node (or NULL).
+
+1) : traversing doubly LL
+2) : insert node at head in doubly LL
+3) : insert node at tail in doubly LL
+4) : insert node at any position in doubly LL 
+(handle all three cases like , 1st , mid and last 
+position) */
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+		Node* prev;
+	
+	public:
+		// constructor
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+			this->prev=NULL;
+		}
+};
+
+// <-----------------------inserting node at head in doubly LL------------------------->
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head->prev=temp;
+		head=temp;
+	}
+}
+
+
+// <-----------------------inserting node at tail in doubly LL------------------------->
+void insertAtTail(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		tail->next=temp;
+		temp->prev=tail;
+		tail=temp;
+	}
+}
+
+// <-----------------insert node at any position in doubly LL---------------------->
+void insertAtAnyPosition(Node* &tail,Node* &head,int data,int position){
+	// if position is 1st
+	if(position == 1){
+		insertAtHead(tail,head,data);
+		return;
+	}
+	
+	Node* temp=head;
+	// any position except 1st
+	int count=1;
+	while(count < position - 1){
+		temp=temp->next;
+		count++;
+	}
+	
+	// if position is last
+	if(temp->next == NULL){
+		insertAtTail(tail,head,data);
+		return;
+	}
+	
+	Node* nodeToInsert=new Node(data);
+	nodeToInsert->next=temp->next;
+	temp->next->prev=nodeToInsert;
+	temp->next=nodeToInsert;
+	nodeToInsert->prev=temp;
+}
+// traversing LL
+void print(Node* &head){
+	Node* temp=head;
+	while(temp != NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+
+int main(){
+	
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	
+	// inserting node at head in doubly LL
+	insertAtHead(tail,head,20);
+	cout<<"insert node at head:";
+	print(head);
+	
+	insertAtHead(tail,head,30);
+	cout<<"insert node at head:";
+	print(head);
+	
+	insertAtHead(tail,head,40);
+	cout<<"insert node at head:";
+	print(head);
+	
+	
+	// inserting node at tail in doubly LL
+	insertAtTail(tail,head,50);
+	cout<<"insert node at tail:";
+	print(head);
+	
+	insertAtTail(tail,head,100);
+	cout<<"insert node at tail:";
+	print(head);
+	
+	insertAtTail(tail,head,1);
+	cout<<"insert node at tail:";
+	print(head);
+	
+	
+	// inserting node at any position in doubly LL
+	insertAtAnyPosition(tail,head,200,2);
+	cout<<"insert node at 2nd position:";
+	print(head);
+	
+	insertAtAnyPosition(tail,head,300,1);
+	cout<<"insert node at 1st position:";
+	print(head);
+	
+	insertAtAnyPosition(tail,head,400,6);
+	cout<<"insert node at 6th position:";
+	print(head);
+	
+	insertAtAnyPosition(tail,head,112,10);
+	cout<<"insert node at 10th position:";
+	print(head);
+}
