@@ -1,0 +1,65 @@
+/* <----------------------------Singly circular linked list ------------------------------>
+
+insertion at any position in singly cicular linked list    */
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+// insert node at any position in singly circular linked list
+void insertAtAnyPosition(Node* &tail,Node* &head,int element,int data){
+	if(tail == NULL){
+		Node* temp=new Node(data);
+		tail=temp;
+		temp->next=temp;
+	}
+	else{
+		Node* curr=tail;
+		while(curr->data != element){
+			curr=curr->next;
+		}
+		Node* temp=new Node(data);
+		temp->next=curr->next;
+		curr->next=temp;
+	}
+}
+
+void print(Node* &tail){
+	Node* temp=tail;
+	do{
+		cout<<tail->data<<" ";
+		tail=tail->next;
+	}while(tail != temp);
+	cout<<endl;
+	
+}
+int main(){
+	
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	
+	// insert node at head in singly circular linked list
+	insertAtAnyPosition(tail,head,10,10);
+	cout<<"inserting node at head:";
+	print(tail);
+	
+	insertAtAnyPosition(tail,head,10,20);
+	cout<<"inserting node at head:";
+	print(tail);
+	
+	insertAtAnyPosition(tail,head,10,30);
+	cout<<"inserting node at head:";
+	print(tail);
+}
