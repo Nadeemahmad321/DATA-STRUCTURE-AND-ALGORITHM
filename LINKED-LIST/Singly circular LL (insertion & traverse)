@@ -52,14 +52,14 @@ int main(){
 	
 	// insert node at head in singly circular linked list
 	insertAtAnyPosition(tail,head,10,10);
-	cout<<"inserting node at head:";
+	cout<<"insert:";
 	print(tail);
 	
 	insertAtAnyPosition(tail,head,10,20);
-	cout<<"inserting node at head:";
+	cout<<"insert:";
 	print(tail);
 	
 	insertAtAnyPosition(tail,head,10,30);
-	cout<<"inserting node at head:";
+	cout<<"insert:";
 	print(tail);
 }
