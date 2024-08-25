@@ -1,0 +1,105 @@
+/* <----------------------------Singly circular linked list ------------------------------>
+
+insertion at any position in singly cicular linked list    */
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+		
+		~Node(){
+			int value=this->data;
+			while(this->next != NULL){
+				delete next;
+				this->next=NULL;
+			}
+			cout<<"memory is free for node with data:"<<value<<endl;
+		}
+};
+
+// insert node at any position in singly circular linked list
+void insertAtAnyPosition(Node* &tail,Node* &head,int element,int data){
+	if(tail == NULL){
+		Node* temp=new Node(data);
+		tail=temp;
+		temp->next=temp;
+	}
+	else{
+		Node* curr=tail;
+		while(curr->data != element){
+			curr=curr->next;
+		}
+		Node* temp=new Node(data);
+		temp->next=curr->next;
+		curr->next=temp;
+	}
+}
+
+// <---------------------------delete node from singly circular LL------------------->
+void deleteNodeFromAnyPosition(Node* &tail,int value){
+	if(tail == NULL){
+		cout<<"List is empty, please check again"<<endl;
+	}
+	else{
+		Node* prev=tail;
+		Node* curr=prev->next;
+		while(curr->data != value){
+			prev=curr;
+			curr=curr->next;
+		}
+		
+		prev->next=curr->next;
+		if(tail == curr){
+			tail=prev;
+		}
+		curr->next=NULL;
+		delete curr;
+	}
+}
+
+void print(Node* &tail){
+	Node* temp=tail;
+	do{
+		cout<<tail->data<<" ";
+		tail=tail->next;
+	}while(tail != temp);
+	cout<<endl;
+	
+}
+int main(){
+	
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	
+	// insert node at head in singly circular linked list
+	insertAtAnyPosition(tail,head,10,10);
+	cout<<"inserting node at head:";
+	print(tail);
+	
+	insertAtAnyPosition(tail,head,10,20);
+	cout<<"insert:";
+	print(tail);
+	
+	insertAtAnyPosition(tail,head,10,30);
+	cout<<"insert:";
+	print(tail);
+	
+	insertAtAnyPosition(tail,head,10,40);
+	cout<<"insert:";
+	print(tail);
+	
+	
+	deleteNodeFromAnyPosition(tail,10);
+	cout<<"after deleting node :";
+	print(tail);
+}
