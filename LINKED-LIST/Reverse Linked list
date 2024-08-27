@@ -31,7 +31,10 @@ void insertAtHead(Node* &tail,Node* &head,int data){
 
 
 // <-----------------------------Reverse Linked List---------------------------------->
-void reverseLinkedList(Node* &tail,Node* &head){
+Node* reverseLinkedList(Node* &tail,Node* &head){
+	if(head == NULL || head->next == NULL){
+		return head;
+	}
 	Node* prev=NULL;
 	Node* curr=head;
 	
