@@ -1,0 +1,72 @@
+/* <--------------------------Middle of Linked List---------------------------->
+
+optimise solution  */
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head=temp;
+	}
+}
+
+
+// <---------------------middle of linked list-------------------------------->
+Node* middleOfLinkedList(Node* head){
+	if(head == NULL || head->next == NULL){
+		return head;
+	}
+	if(head->next->next == NULL){
+		return head->next;
+	}
+	Node* slow=head;
+	Node* fast=head->next;
+	
+	while(fast != NULL){
+		fast=fast->next;
+		if(fast != NULL){
+			fast=fast->next;
+		}
+		slow=slow->next;
+	}
+	return slow;
+}
+
+
+
+int main(){
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	insertAtHead(tail,head,10);
+	insertAtHead(tail,head,9);
+//	insertAtHead(tail,head,11);
+	insertAtHead(tail,head,14);
+	insertAtHead(tail,head,15);
+	
+	// middle of linked list
+	Node* mid=middleOfLinkedList(head);
+	cout<<"middle of linked list:"<<mid->data;
+
+}
