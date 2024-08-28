@@ -1,4 +1,4 @@
-/* <--------------------------Reverse Linked List in k group---------------------------->*/
+/* <--------------------------Linked list is circular or not---------------------------->*/
 
 
 #include<iostream>
@@ -78,7 +78,8 @@ int main(){
 	insertAtHead(tail,head,15);
 	cout<<"inserting at head:";
 	print(head);
-	
+
+       // Linked list circular or not
 	if(isCircularLinkedList(head)){
 		cout<<"given linked list is circular"<<endl;
 	}
