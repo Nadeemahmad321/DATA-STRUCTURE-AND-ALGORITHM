@@ -1,0 +1,103 @@
+/* <--------------------------Reverse Linked List in k group---------------------------->*/
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head=temp;
+	}
+}
+
+// <-------------------Reverse linked list in k group------------------------>
+Node* reverseKgroup(Node* &head,int k){
+	
+	if (head == NULL){
+		return NULL;
+	}
+	
+	Node* forward=NULL;
+	Node* curr=head;
+	Node* prev=NULL;
+	int count=0;
+	while(curr != NULL && count < k){
+		forward=curr->next;
+		curr->next=prev;
+		prev=curr;
+		curr=forward;
+		count++;
+	}
+	
+	if(forward != NULL){
+		head->next = reverseKgroup(forward,k);
+	}
+	head=prev;
+	return head;
+}
+
+
+
+void print(Node* &ans){
+	Node* temp=ans;
+	while(temp != NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+		
+	}
+	cout<<endl;
+}
+
+int main(){
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	insertAtHead(tail,head,10);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,9);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,11);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,14);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,15);
+	cout<<"inserting at head:";
+	print(head);
+	
+	
+	cout<<"Enter the k:";
+	int k;
+	cin>>k;
+	
+	// Reverse LL in k group
+	Node* ans=reverseKgroup(head,k);
+	cout<<"after reverse:"<<endl;
+	print(ans);
+}
