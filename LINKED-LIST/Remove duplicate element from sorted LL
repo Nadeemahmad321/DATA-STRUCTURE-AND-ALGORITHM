@@ -1,0 +1,92 @@
+/* <--------------------remove duplicate from sorted linked list------------------->*/
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=temp;
+		tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head=temp;
+	}
+}
+
+// <------------------remove duplicate from sorted linked list------------------>
+Node* removeDuplicateFromSortedLL(Node* &head){
+	if(head == NULL){
+		return NULL;
+	}
+	
+	Node* curr=head;
+	while(curr != NULL){
+		if((curr->next != NULL) && curr->data == curr->next->data){
+			Node* next_next=curr->next->next;
+			Node* nodeToDelete=curr->next;
+			delete (nodeToDelete);
+			curr->next=next_next;
+		}
+		else{
+			curr=curr->next;
+		}
+	}
+	return head;
+}
+
+
+void print(Node* &head){
+	Node* temp=head;
+	while(temp != NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+		
+	}
+	cout<<endl;
+}
+
+int main(){
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	insertAtHead(tail,head,3);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,3);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,2);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,2);
+	cout<<"inserting at head:";
+	print(head);
+	
+	insertAtHead(tail,head,1);
+	cout<<"inserting at head:";
+	print(head);
+	
+	// remove duplicate from sorted linked list
+	removeDuplicateFromSortedLL(head);
+	print(head);
+
+}
