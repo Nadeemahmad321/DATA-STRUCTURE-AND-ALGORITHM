@@ -1,0 +1,140 @@
+/* <----------------------------Remove loop from linked list------------------------------>*/
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+// insert node at any position in singly circular linked list
+void insertAtAnyPosition(Node* &tail,Node* &head,int element,int data){
+	if(tail == NULL){
+		Node* temp=new Node(data);
+		tail=temp;
+		head=temp;
+		temp->next=temp;
+		
+	}
+	else{
+		Node* curr=tail;
+		while(curr->data != element){
+			curr=curr->next;
+		}
+		Node* temp=new Node(data);
+		temp->next=curr->next;
+		curr->next=temp;
+	}
+}
+
+// floyd cycle detection algorithm
+Node* floydCycleDetection(Node* &head){
+	
+	if(head == NULL){
+		return NULL;
+	}
+	
+	Node* slow=head;
+	Node* fast=head;
+	
+	while(slow != NULL && fast != NULL){
+		fast=fast->next;
+		if(fast != NULL){
+			fast=fast->next;
+		}
+		
+		slow=slow->next;
+		
+		if(slow == fast){
+			return slow;
+		}
+	}
+	return NULL;
+}
+
+
+// <-------------------------starting node of loop---------------------------->
+Node* getStartingNodeOfCycle(Node* &head){
+	
+	if(head == NULL){
+		return NULL;
+	}
+	
+	Node* slow=head;
+	Node* intersection=floydCycleDetection(head);
+	
+	while(slow != intersection){
+		slow=slow->next;
+		intersection=intersection->next;
+	}
+	return slow;
+}
+
+
+//<-------------------------Remove Loop from linked list----------------->
+
+Node* removeLoop(Node* &head){
+	
+	if(head == NULL){
+		return NULL;
+	}
+	
+	Node* startOfLoop=getStartingNodeOfCycle(head);
+	Node* temp=startOfLoop;
+	while(temp->next != startOfLoop){
+		temp=temp->next;
+	}
+	temp->next=NULL;
+}
+void print(Node* &tail){
+	Node* temp=tail;
+	do{
+		cout<<tail->data<<" ";
+		tail=tail->next;
+	}while(tail != temp);
+	cout<<endl;
+	
+}
+int main(){
+	
+	Node* head=NULL;
+	Node* tail=NULL;
+	
+	
+	// insert node at head in singly circular linked list
+	insertAtAnyPosition(tail,head,10,10);
+	cout<<"insert:";
+	print(tail);
+	
+	insertAtAnyPosition(tail,head,10,20);
+	cout<<"insert:";
+	print(tail);
+	
+	insertAtAnyPosition(tail,head,10,30);
+	cout<<"insert:";
+	print(tail);
+	
+	
+	// get first node of cycle
+	Node* loop=getStartingNodeOfCycle(head);
+	cout<<"loop is start from:"<<loop->data<<endl;
+	
+	// remove loop
+	removeLoop(head);
+	
+	// cycle detection in linked list
+	if(floydCycleDetection(head)){
+		cout<<"cycle is present"<<endl;
+	}
+	else{
+		cout<<"cycle is not present"<<endl;
+	}
+}
