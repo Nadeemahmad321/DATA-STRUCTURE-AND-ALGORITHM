@@ -1,0 +1,172 @@
+/* <---------------------Add two number represented by linked list----------------------->*/
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+void insertAtHead(Node* &tail1,Node* &head1,int data){
+	if(head1 == NULL){
+		Node* temp=new Node(data);
+		head1=tail1=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head1;
+		head1=temp;
+	}
+}
+
+Node* reverseLinkedList(Node* &head1){
+	if(head1 == NULL || head1->next == NULL){
+		return head1;
+	}
+	
+	Node* prev=NULL;
+	Node* curr=head1;
+	Node* forward=NULL;
+	
+	while(curr != NULL){
+		
+		forward=curr->next;
+		curr->next=prev;
+		prev=curr;
+		curr=forward;
+	}
+	return prev;
+}
+
+void insertAtTail(Node* &tail,Node* &head,int data){
+	// whenever there is no node is present
+	if(tail == NULL){
+		Node* temp=new Node(data);
+		tail=temp;
+		head=temp;
+	}
+	
+	// whenever there is atleast one node is node is present
+	else{
+		Node* temp=new Node(data);
+		tail->next=temp;
+		tail=temp;
+	}
+}
+
+
+Node* add(Node* &head1,Node* &head2){
+	Node* ansHead=NULL;
+	Node* ansTail=NULL;
+	int carry=0;
+	while(head1 != NULL && head2 != NULL){
+		int sum = carry + head1->data + head2->data;
+		int digit=sum%10;
+		insertAtTail(ansTail,ansHead,digit);
+		carry=sum/10;
+		head1=head1->next;
+		head2=head2->next;
+	}
+	while(head1 != NULL){
+		int sum = carry + head1->data;
+		int digit=sum%10;
+		insertAtTail(ansTail,ansHead,digit);
+		carry=sum/10;
+		head1=head1->next;
+	}
+	while(head2 != NULL){
+		int sum = carry + head2->data;
+		int digit=sum%10;
+		insertAtTail(ansTail,ansHead,digit);
+		carry=sum/10;
+		head2=head2->next;
+	}
+	while(carry != 0){
+		int sum=carry;
+		int digit=sum%10;
+		insertAtTail(ansTail,ansHead,digit);
+		carry=sum/10;
+	}
+	return ansHead;
+}
+
+// <--------------------------Add two linked list------------------------->
+Node* addTwoList(Node* &head1,Node* &head2){
+	head1=reverseLinkedList(head1);
+	head2=reverseLinkedList(head2);
+	
+	Node* ans=add(head1,head2);
+	ans=reverseLinkedList(ans);
+	return ans;
+}
+
+
+void print(Node* &ans){
+	Node* temp=ans;
+	while(temp != NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+
+int main(){
+	
+	Node* head1=NULL;
+	Node* tail1=NULL;
+	
+	
+	cout<<"first linked list->"<<endl;
+	cout<<endl;
+
+	insertAtHead(tail1,head1,6);
+	cout<<"insert at head:";
+	print(head1);
+	
+	
+	insertAtHead(tail1,head1,3);
+	cout<<"insert at head:";
+	print(head1);
+	
+	insertAtHead(tail1,head1,8);
+	cout<<"insert at head:";
+	print(head1);
+	
+	insertAtHead(tail1,head1,6);
+	cout<<"insert at head:";
+	print(head1);
+	
+	cout<<endl;
+	cout<<"Second linked list->"<<endl;
+	cout<<endl;
+	Node* head2=NULL;
+	Node* tail2=NULL;
+	
+	insertAtHead(tail2,head2,1);
+	cout<<"insert at head:";
+	print(head2);
+	
+	insertAtHead(tail2,head2,9);
+	cout<<"insert at head:";
+	print(head2);
+	
+	insertAtHead(tail2,head2,2);
+	cout<<"insert at head:";
+	print(head2);
+	
+	cout<<endl;
+	
+	
+	// add number in linked list
+	Node* ans=addTwoList(head1,head2);
+	print(ans);
+	
+}
