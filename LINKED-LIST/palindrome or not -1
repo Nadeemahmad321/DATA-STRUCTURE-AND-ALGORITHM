@@ -1,0 +1,102 @@
+/* <---------------------Check linked list is palindrome or not-------------------------->
+
+1) vector is used  - so the space complexity is o(n) */
+
+#include<iostream>
+#include<vector>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head=temp;
+	}
+}
+// <-----------------------check palindrome or not--------------------------->
+bool isPalindrome(Node* &tail,Node* &head){
+	vector<int>ans;
+	
+	Node* temp=head;
+	while(temp != NULL){
+		ans.push_back(temp->data);
+		temp=temp->next;
+	}
+	int s=0;
+	int e=ans.size()-1;
+	while(s <= e){
+		if(ans[s] != ans[e]){
+			return false;
+		}
+		else{
+			s++;
+			e--;
+		}
+	}
+	return true;
+}
+
+void print(Node* &head){
+	Node* temp=head;
+	while(temp != NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+int main(){
+	
+	Node* head=NULL;
+	Node* tail=NULL;
+
+	insertAtHead(tail,head,1);
+	cout<<"insert at head:";
+	print(head);
+	
+	
+	insertAtHead(tail,head,2);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,3);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,3);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,2);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,1);
+	cout<<"insert at head:";
+	print(head);
+	cout<<endl;
+	
+	//check palindrome or not 
+	if(isPalindrome(tail,head)){
+		cout<<"given linked list is palindrome"<<endl;
+	}
+	else{
+		cout<<"given linked list is not palindrome"<<endl;
+	}
+	
+}
