@@ -69,7 +69,7 @@ Node* reverseLinkedList(Node* &mid){
 	}
 	return prev;
 }
-
+// <-----------------------check palindrome or not--------------------------->
 bool isPalindrome(Node* &tail,Node* &head){
 	if(head->next == NULL){
 		return true;
@@ -97,7 +97,7 @@ bool isPalindrome(Node* &tail,Node* &head){
 	return true;
 }
 
-// <-----------------------check palindrome or not--------------------------->
+
 void print(Node* &head){
 	Node* temp=head;
 	while(temp != NULL){
