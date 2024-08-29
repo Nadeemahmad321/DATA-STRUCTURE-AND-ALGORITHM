@@ -27,6 +27,10 @@ void insertAtHead(Node* &tail1,Node* &head1,int data){
 }
 
 Node* solve(Node* &head1,Node* &head2){
+	if(head1->next == NULL){
+		head1->next=head2;
+		return head1;
+	}
 	
 	Node* curr1=head1;
 	Node* next1=curr1->next;
