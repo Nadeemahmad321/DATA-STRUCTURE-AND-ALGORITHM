@@ -1,0 +1,149 @@
+/* <---------------------Check linked list is palindrome or not-------------------------->
+
+step 1: find mid 
+step 2: reverse after mid
+step 3: check for palindrome
+step 4: repeat step 2 */
+
+#include<iostream>
+#include<vector>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* next;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->next=NULL;
+		}
+};
+
+void insertAtHead(Node* &tail,Node* &head,int data){
+	if(head == NULL){
+		Node* temp=new Node(data);
+		head=tail=temp;
+	}
+	else{
+		Node* temp=new Node(data);
+		temp->next=head;
+		head=temp;
+	}
+}
+
+// finding middle element of linked list
+Node* middleOfLinkedList(Node* &head){
+	if(head == NULL){
+		return NULL;
+	}
+	
+	Node* slow=head;
+	Node* fast=head->next;
+	
+	while(slow != NULL && fast != NULL){
+		fast=fast->next;
+		if(fast != NULL){
+			fast=fast->next;
+		}
+		slow=slow->next;
+	}
+	return slow;	
+}
+
+Node* reverseLinkedList(Node* &mid){
+	if(mid == NULL){
+		return NULL;
+	}
+	
+	Node* prev=NULL;
+	Node* curr=mid;
+	Node* forward=NULL;
+	
+	while(curr != NULL){
+		
+		forward=curr->next;
+		curr->next=prev;
+		prev=curr;
+		curr=forward;
+	}
+	return prev;
+}
+
+bool isPalindrome(Node* &tail,Node* &head){
+	if(head->next == NULL){
+		return true;
+	}
+	
+	Node* mid=middleOfLinkedList(head);
+	Node* temp=mid->next;
+	mid->next=reverseLinkedList(temp);
+	
+	Node* head1=head;
+	Node* head2=mid->next;
+	
+	while( head2 != NULL){
+		if(head1->data == head2->data){
+			head1=head1->next;
+			head2=head2->next;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	temp=mid->next;
+	mid->next=reverseLinkedList(temp);
+	return true;
+}
+
+// <-----------------------check palindrome or not--------------------------->
+void print(Node* &head){
+	Node* temp=head;
+	while(temp != NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+int main(){
+	
+	Node* head=NULL;
+	Node* tail=NULL;
+
+	insertAtHead(tail,head,1);
+	cout<<"insert at head:";
+	print(head);
+	
+	
+	insertAtHead(tail,head,2);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,3);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,3);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,2);
+	cout<<"insert at head:";
+	print(head);
+	
+	insertAtHead(tail,head,1);
+	cout<<"insert at head:";
+	print(head);
+	cout<<endl;
+	
+
+	//check palindrome or not 
+	if(isPalindrome(tail,head)){
+		cout<<"given linked list is palindrome"<<endl;
+	}
+	else{
+		cout<<"given linked list is not palindrome"<<endl;
+	}	
+}
