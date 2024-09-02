@@ -1,0 +1,68 @@
+// <--------------------------inOrder traversal---------------------------->
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+
+// <-------------------------in order traversal------------------------->
+void inOrderTraversal(Node* &root){
+	if(root == NULL){
+		return;
+	}
+	
+	inOrderTraversal(root->left);
+	cout<<root->data<<" ";
+	inOrderTraversal(root->right);
+}
+
+
+// <-------------------insert element into binary search tree----------------------->
+Node* insertIntoBST(Node* &root,int data){
+	if(root == NULL){
+		root=new Node(data);
+		return root;
+	}
+	
+	if(data > root->data){
+		root->right=insertIntoBST(root->right,data);
+	}
+	else{
+		root->left=insertIntoBST(root->left,data);
+	}
+	return root;
+}
+
+// <-------------------Take input for Binary search tree------------------------->
+void takeInput(Node* &root){
+	int data;
+	cin>>data;
+	while(data != -1){
+		root=insertIntoBST(root,data);
+		cin>>data;
+	}
+}
+
+
+int main(){
+	Node* root=NULL;
+	
+	cout<<"Enter the data for creation of BST"<<endl;
+	takeInput(root);
+	
+	
+	cout<<endl<<"inOrder traversal"<<endl;
+	inOrderTraversal(root);
+}
