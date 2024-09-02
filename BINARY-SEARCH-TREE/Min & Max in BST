@@ -1,0 +1,77 @@
+// <----------------------Minimum and maximum in BST--------------------------->
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+
+// <----------------Minimum element in binary search tree----------------------->
+Node* minimumELementInBST(Node* &root){
+	Node* temp=root;
+	
+	while(temp->left != NULL){
+		temp=temp->left;
+	}
+	return temp;
+}
+
+// <----------------Maximum element in binary search tree----------------------->
+Node* maximumElementInBST(Node* &root){
+	Node* temp=root;
+	
+	while(temp->right != NULL){
+		temp=temp->right;
+	}
+	return temp;
+}
+
+
+// <-------------------insert element into binary search tree----------------------->
+Node* insertIntoBST(Node* &root,int data){
+	if(root == NULL){
+		root=new Node(data);
+		return root;
+	}
+	
+	if(data > root->data){
+		root->right=insertIntoBST(root->right,data);
+	}
+	else{
+		root->left=insertIntoBST(root->left,data);
+	}
+	return root;
+}
+
+// <-------------------Take input for Binary search tree------------------------->
+void takeInput(Node* &root){
+	int data;
+	cin>>data;
+	while(data != -1){
+		root=insertIntoBST(root,data);
+		cin>>data;
+	}
+}
+
+
+int main(){
+	Node* root=NULL;
+	
+	cout<<"Enter the data for creation of BST"<<endl;
+	takeInput(root);
+	
+	cout<<endl;
+	cout<<"minimum element in BST:"<<minimumELementInBST(root)->data<<endl;
+	cout<<"maximum element in BST:"<<maximumElementInBST(root)->data<<endl;
+}
