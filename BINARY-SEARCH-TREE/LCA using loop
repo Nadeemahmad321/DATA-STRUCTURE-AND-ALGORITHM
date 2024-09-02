@@ -1,0 +1,92 @@
+/* <--------------Longest common ancestor in BST (using Loop)-----------------------> */
+
+
+#include<iostream>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+
+Node* LCAinaBST(Node* &root,int p,int q){
+	
+	while(root != NULL){
+		if(root->data > p && root->data > q){
+			root=root->left;
+		}
+		else if(root->data < p && root->data < q){
+			root=root->right;
+		}
+		else{
+			break;
+		}
+	}
+	return root;
+}
+
+
+void inOrderTraversal(Node* &root){
+	if(root == NULL){
+		return;
+	}
+	
+	inOrderTraversal(root->left);
+	cout<<root->data<<" ";
+	inOrderTraversal(root->right);
+}
+
+
+Node* insertIntoBST(Node* &root,int data){
+	if(root == NULL){
+		root=new Node(data);
+		return root;
+	}
+	
+	if(root->data > data){
+		root->left=insertIntoBST(root->left,data);
+	}
+	else{
+		root->right=insertIntoBST(root->right,data);
+	}
+	return root;
+}
+
+
+Node* takeInput(Node* &root){
+	int data;
+	cin>>data;
+	while(data != -1){
+		root=insertIntoBST(root,data);
+		cin>>data;
+	}
+	return root;
+}
+
+
+int main(){
+	Node* root=NULL;
+	
+	cout<<"Enter the data for creation of BST"<<endl;
+	takeInput(root);
+	
+	cout<<endl<<"inOrder Traversal"<<endl;
+	inOrderTraversal(root);
+	
+	cout<<endl;
+	int p,q;
+	cout<<"Enter p & q:";
+	cin>>p >> q;
+	
+	Node* ans=LCAinaBST(root,p,q);
+	cout<<"Longest common ancestor is:"<<ans->data<<endl;
+}
