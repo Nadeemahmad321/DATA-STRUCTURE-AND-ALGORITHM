@@ -1,5 +1,3 @@
-
-```markdown
 # Tree Data Structure in C++
 
 This repository contains a C++ implementation of various tree data structures, focusing on binary trees and binary search trees (BST). It also includes examples of binary tree traversal techniques.
@@ -66,6 +64,3 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
-
-Feel free to modify any sections to better fit your specific implementation or additional features you might want to include!
