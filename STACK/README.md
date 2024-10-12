@@ -30,14 +30,3 @@ The stack supports basic operations such as push, pop, peek, and checking if it'
 
 5. **How is a stack different from a queue?**
    - A stack is LIFO (Last In First Out), while a queue is FIFO (First In First Out). In a queue, the first element added is the first to be removed.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
-```
-
-Feel free to adjust the questions and answers based on your stack implementation and any specific areas you'd like to focus on!
