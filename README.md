@@ -1,4 +1,3 @@
-```markdown
 # Data Structures and Algorithms in C++
 
 This repository contains solutions to a variety of data structure and algorithm problems using C++.
@@ -50,5 +49,4 @@ Common algorithms for graphs include:
 - **Depth-First Search (DFS)**: Explores as far as possible along each branch before backtracking.
 - **Breadth-First Search (BFS)**: Explores all neighbors at the present depth before moving on to nodes at the next depth level.
 - **Dijkstra’s Algorithm**: Finds the shortest path from a source node to all other nodes in a weighted graph.
-
 
