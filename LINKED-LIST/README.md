@@ -1,4 +1,3 @@
-```markdown
 # Linked List Data Structure in C++
 
 This repository contains a C++ implementation of various types of linked lists.
