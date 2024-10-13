@@ -1,0 +1,98 @@
+// <------------------------Two sum in BST----------------------------->
+
+#include<iostream>
+#include<vector>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+// <-----------two sum of binary search tree------------------->
+bool twoSumOfBST(Node* &root,vector<int>&arr,int target){
+	int i=0;
+	int size=arr.size();
+	int j=size-1;
+	while(i < j){
+		int sum=arr[i] + arr[j];
+		if(sum != target){
+			if(sum > target){
+				j--;
+			}
+			else{
+				i++;
+			}
+		}
+		else{
+			return true;
+		}
+	}
+	return false;
+}
+
+void inOrderTraversal(Node* &root,vector<int>&arr){
+	if(root == NULL){
+		return;
+	}
+	
+	inOrderTraversal(root->left,arr);
+	arr.push_back(root->data);
+	inOrderTraversal(root->right,arr);
+}
+
+
+Node* insertIntoBST(Node* &root,int data){
+	if(root == NULL){
+		root=new Node(data);
+		return root;
+	}
+	
+	if(root->data > data){
+		root->left=insertIntoBST(root->left,data);
+	}
+	else{
+		root->right=insertIntoBST(root->right,data);
+	}
+	return root;
+}
+
+
+Node* takeInput(Node* &root){
+	int data;
+	cin>>data;
+	while(data != -1){
+		root=insertIntoBST(root,data);
+		cin>>data;
+	}
+	return root;
+}
+
+
+int main(){
+	Node* root=NULL;
+	
+	cout<<"Enter the data for creation of BST"<<endl;
+	takeInput(root);
+	
+	vector<int>arr;
+	inOrderTraversal(root,arr);
+	
+	int target;
+	cout<<endl<<"Enter the target value:";
+	cin>>target;
+	
+	if(twoSumOfBST(root,arr,target)){
+		cout<<"true"<<endl;
+	}
+	else{
+		cout<<"false"<<endl;
+	}	
+}
