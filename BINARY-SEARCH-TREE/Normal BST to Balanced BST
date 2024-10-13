@@ -1,0 +1,110 @@
+// <-----------------------Normal BST to Balanced BST----------------------->
+
+
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+	
+	public:
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+void levelOrderTravesal(Node* &ans){
+	queue<Node*>q;
+	q.push(ans);
+	q.push(NULL);
+	while(!q.empty()){
+		Node* temp=q.front();
+		q.pop();
+		if(temp == NULL){
+			cout<<endl;
+			if(!q.empty()){
+				q.push(NULL);
+			}
+		}
+		else{
+			cout<<temp->data<<" ";
+			if(temp->left){
+				q.push(temp->left);
+			}
+			if(temp->right){
+				q.push(temp->right);
+			}
+		}
+	}
+}
+void inOrderTraversal(Node* &root,vector<int>&arr){
+	if(root == NULL){
+		return;
+	}
+	
+	inOrderTraversal(root->left,arr);
+	arr.push_back(root->data);
+	inOrderTraversal(root->right,arr);
+}
+
+Node* inorderToBST(int s,int e,vector<int>&arr){
+	if(s > e){
+		return NULL;
+	}
+	int mid=s+(e-s)/2;
+	Node* root=new Node(arr[mid]);
+	root->left=inorderToBST(s,mid-1,arr);
+	root->right=inorderToBST(mid+1,e,arr);
+	return root;
+}
+Node* balancedBST(Node* &root){
+	vector<int>arr;
+	inOrderTraversal(root,arr);
+	return inorderToBST(0,arr.size()-1,arr);
+}
+Node* insertIntoBST(Node* &root,int data){
+	if(root == NULL){
+		root=new Node(data);
+		return root;
+	}
+	
+	if(root->data > data){
+		root->left=insertIntoBST(root->left,data);
+	}
+	else{
+		root->right=insertIntoBST(root->right,data);
+	}
+	return root;
+}
+
+
+Node* takeInput(Node* &root){
+	int data;
+	cin>>data;
+	while(data != -1){
+		root=insertIntoBST(root,data);
+		cin>>data;
+	}
+	return root;
+}
+
+
+int main(){
+	Node* root=NULL;
+	
+	cout<<"Enter the data for creation of BST"<<endl;
+	takeInput(root);
+	cout<<"levelOrder travesal:"<<endl;
+	levelOrderTravesal(root);
+	cout<<endl;
+	Node* ans=balancedBST(root);
+	cout<<"levelOrder travesal:"<<endl;
+	levelOrderTravesal(ans);
+	
+}
