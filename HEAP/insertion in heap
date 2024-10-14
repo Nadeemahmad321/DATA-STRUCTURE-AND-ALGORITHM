@@ -1,4 +1,5 @@
-// <------------------------insertion in heap------------------------------->
+/* <------------------------insertion in heap------------------------------->
+complexity O(logn) */
 
 #include<iostream>
 using namespace std;
