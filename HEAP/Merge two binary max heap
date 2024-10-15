@@ -1,0 +1,58 @@
+// <---------------------Merge two binary max heap------------------------>
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void heapify(vector<int>& arr, int size, int i) {
+    int largest = i;
+    int left = 2 * i;
+    int right = 2 * i + 1;
+
+    // Check if left child exists and is greater than the current largest
+    if (left < size && arr[largest] < arr[left]) {
+        largest = left;
+    }
+    // Check if right child exists and is greater than the current largest
+    if (right < size && arr[largest] < arr[right]) {
+        largest = right;
+    }
+    // If the largest is not the root, swap and continue heapifying
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, size, largest);
+    }
+}
+
+void mergeHeap(vector<int>& a, vector<int>& b, vector<int>& arr) {
+    // Push elements of both heaps into arr
+    arr.push_back(-1); // Placeholder for 1-based index
+    for (auto i : a) {
+        arr.push_back(i);
+    }
+    for (auto i : b) {
+        arr.push_back(i);
+    }
+
+    int size = arr.size();
+    // Build the heap from the last non-leaf node to the root
+    for (int i = size / 2; i > 0; i--) {
+        heapify(arr, size, i);
+    }
+}
+
+int main() {
+    vector<int> a = {10,5,6,2}; // Example heap 1
+    vector<int> b = {12,7,9};    // Example heap 2
+    vector<int> arr;
+
+    mergeHeap(a, b, arr);
+
+    // Display the merged heap
+    for (int i = 1; i < arr.size(); i++) { // Start from index 1
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
