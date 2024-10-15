@@ -1,0 +1,91 @@
+// <----------------------Convert BST into Min heap-------------------------->
+#include<iostream>
+#include<vector>
+using namespace std;
+class Node{
+	public:
+		int data;
+		Node* left;
+		Node* right;
+		
+		Node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+void inOrder(Node* &root,vector<int>&inOrderArr){
+	if(root == NULL){
+		return;
+	}
+	inOrder(root->left,inOrderArr);
+	inOrderArr.push_back(root->data);
+	inOrder(root->right,inOrderArr);
+}
+
+void preOrder(Node* &root){
+	if(root == NULL){
+		return;
+	}
+	cout<<root->data<<" ";
+	preOrder(root->left);
+	preOrder(root->right);
+}
+
+void preorderFill(Node* root, vector<int>& inorderArr, int& index) {
+    if (root == NULL) {
+        return;
+    }
+
+    // Copy the next element from the inorder array
+    root->data = inorderArr[index++];
+
+    // Fill left and right subtree
+    preorderFill(root->left, inorderArr, index);  
+    preorderFill(root->right, inorderArr, index);
+}
+Node* convertBSTintoMinHeap(Node* &root){
+	vector<int>inOrderArr;
+	cout<<"inOrder Traversal"<<endl;
+	inOrder(root,inOrderArr);
+	for(int i=0;i<inOrderArr.size();i++){
+		cout<<inOrderArr[i]<<" ";
+	}
+	
+	int index = 0;
+
+    preorderFill(root,inOrderArr,index);
+	
+}
+Node* insertIntoBST(Node* &root,int data){
+	if(root == NULL){
+		root=new Node(data);
+		return root;
+	}
+	if(data < root->data){
+		root->left=insertIntoBST(root->left,data);
+	}
+	else{
+		root->right=insertIntoBST(root->right,data);
+	}
+	return root;
+}
+void takeInput(Node* &root){
+	int data;
+	cin>>data;
+	while(data != -1){
+		root=insertIntoBST(root,data);
+		cin>>data;
+	}
+}
+int main(){
+	Node* root=NULL;
+	cout<<"Enter the input"<<endl;
+	takeInput(root);
+	
+	
+	cout<<endl;
+	convertBSTintoMinHeap(root);
+	cout<<endl<<"preOrder:"<<endl;
+	preOrder(root);
+}
