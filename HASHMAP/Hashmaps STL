@@ -1,0 +1,61 @@
+/*  <----------------Hashmap---------------->
+1: insertion
+2: searching 
+3: size
+4: Present or not */
+
+
+#include<iostream>
+#include<map>
+#include<unordered_map>
+using namespace std;
+int main(){
+	unordered_map<string,int>m;
+	
+	// 1st rule of insertion
+	pair<string,int>price1=make_pair("Apple",300);
+	m.insert(price1);
+	
+	// 2nd rule of insertion
+	pair<string,int>price2("Orange",100);
+	m.insert(price2);
+	
+	pair<string,int>price3("PineApple",150);
+	m.insert(price3);
+	
+	// 3rd rule of insertion
+	m["Pomegranate"]=250;
+	
+	
+	// searching
+	cout<<"Price of pomegranate is:"<<m["Pomegranate"]<<endl;
+	cout<<"Price of Apple is:"<<m["Apple"]<<endl;
+	
+	// another way of searching
+	cout<<"Price of Orange is:"<<m.at("Orange")<<endl;
+	
+	// size
+	cout<<"size of map:"<<m.size()<<endl;
+	
+	// to check present
+	cout<<"Banana isPresent:"<<m.count("Banana")<<endl;
+	cout<<"Pomegranate isPresent:"<<m.count("Pomegranate")<<endl;
+	
+	// erase 
+	m.erase("Apple");
+	cout<<"size of map:"<<m.size()<<endl;
+	
+	// loop in map
+	cout<<endl<<"for each in map"<<endl;
+	for(auto i:m){
+		cout<<i.first<<":"<<i.second<<endl;
+	}
+	
+	// iterator
+	unordered_map<string,int> :: iterator it=m.begin();
+	cout<<endl<<"iterator in map"<<endl;
+	while(it != m.end()){
+		cout<<it->first<<":"<<it->second<<endl;
+		it++;
+	}
+}
