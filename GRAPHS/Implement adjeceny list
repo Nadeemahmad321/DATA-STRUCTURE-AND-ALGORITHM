@@ -1,0 +1,50 @@
+// <---------------------------- Adjeceny list----------------------->
+#include<iostream>
+#include<map>
+#include<list>
+using namespace std;
+class Graph{
+	public:
+		map<int,list<int> > adjList;
+		
+	void addEdge(int u,int v){
+		// Add edge from u to v
+        adjList[u].push_back(v);
+        // Add edge from v to u because the graph is
+        // undirected
+        adjList[v].push_back(u);
+	}
+	// print adjecency list
+	 void print()
+    {
+        cout << "Adjacency list for the Graph: " << endl;
+        // Iterate over each vertex
+        for (auto i : adjList) {
+            // Print the vertex
+            cout << i.first << " -> ";
+            // Iterate over the connected vertices
+            for (auto j : i.second) {
+                // Print the connected vertex
+                cout << j << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+
+int main(){
+	Graph g;
+	g.addEdge(0,3);
+	g.addEdge(0,4);
+	g.addEdge(1,2);
+	g.addEdge(1,4);
+	g.addEdge(1,5);
+	g.addEdge(2,3);
+	g.addEdge(2,5);
+	g.addEdge(3,5);
+	g.addEdge(4,5);
+	
+	// printing list
+	g.print();
+}
