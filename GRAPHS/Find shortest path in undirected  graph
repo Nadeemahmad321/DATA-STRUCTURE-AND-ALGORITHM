@@ -1,0 +1,66 @@
+// <---------------Find shortest path in undirected  graph------------------------>
+#include<bits/stdc++.h>
+using namespace std;
+vector<int> shortestPath(int vertex,vector<vector<int>>&edges,int src,int terminal){
+	unordered_map<int,list<int>>adjList;
+	unordered_map<int,bool>visited;
+	unordered_map<int,bool>parent;
+	
+	for(int i=0;i<edges.size();i++){
+		int u=edges[i][0];
+		int v=edges[i][1];
+		
+		adjList[u].push_back(v);
+		adjList[v].push_back(u);
+	}
+	queue<int>q;
+	q.push(src);
+	visited[src]=true;
+	parent[src]=-1;
+	
+	while(!q.empty()){
+		int frontNode=q.front();
+		q.pop();
+		
+		for(auto i:adjList[frontNode]){
+			if(!visited[i]){
+				visited[i]=true;
+				parent[i]=frontNode;
+				q.push(i);
+			}
+		}
+	}
+	vector<int>ans;
+	int currNode=terminal;
+	ans.push_back(terminal);
+	while(currNode != src){
+		currNode=parent[currNode];
+		ans.push_back(currNode);
+	}
+	reverse(ans.begin(),ans.end());
+	return ans;
+}
+int main(){
+	int vertex;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	int edgeCount;
+	cout<<"Enter the number of edge:";
+	cin>>edgeCount;
+	
+	vector<vector<int>> edges(edgeCount,vector<int>(2));
+	for(int i=0;i<edgeCount;i++){
+		cin>>edges[i][0] >> edges[i][1];
+	}
+	
+	int src, terminal;
+    cout << "Enter source and terminal vertices: ";
+    cin >> src >> terminal;
+    
+	vector<int> ans=shortestPath(vertex,edges,src,terminal);
+	cout<<"shortest path is:";
+	if(ans.empty())
+	for(auto i:ans){
+		cout<<i<<" ";
+	}
+}
