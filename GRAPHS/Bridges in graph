@@ -13,7 +13,7 @@ int node,int &timer,unordered_map<int,list<int>>&adjList,vector<vector<int>>&res
 			continue;
 		}
 		if(!visited[neighbour]){
-			dfs(discovery,low,visited,parent,neighbour,timer,adjList,result);
+			dfs(discovery,low,visited,node,neighbour,timer,adjList,result);
 			low[node]=min(low[node],low[neighbour]);
 			if(low[neighbour] > discovery[node]){
 				vector<int>ans;
@@ -24,7 +24,7 @@ int node,int &timer,unordered_map<int,list<int>>&adjList,vector<vector<int>>&res
 		}
 		else{
 			//  back edge
-			low[node]=min(low[node],discovery[node]);
+			low[node]=min(low[node],discovery[neighbour]);
 		}
 	}
 }
