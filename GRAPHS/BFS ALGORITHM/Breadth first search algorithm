@@ -1,0 +1,77 @@
+/* <----------------------------BREADTH FISRT SEARCH---------------------------------->*/
+#include<bits/stdc++.h>
+using namespace std;
+// main logic of breadth first algorithm
+void bfs(unordered_map<int,list<int>>&adjList,unordered_map<int,bool>&visited,vector<int>&ans,int node){
+	// creation of queue
+	queue<int>q;
+	//push node in queue
+	q.push(node);
+	//mark node as visited
+	visited[node]=true;
+	ans.push_back(node); // do not ignore this line is ignore then first node does not push in ans vector
+	
+	// check for neighbour
+	while(!q.empty()){
+		int frontNode=q.front();
+		q.pop();
+		
+		for(auto neighbour:adjList[frontNode]){
+			if(!visited[neighbour]){
+				q.push(neighbour);
+				visited[neighbour]=true;
+				ans.push_back(neighbour);
+			}
+		}
+	}
+}
+// Breadth First Search
+vector<int> BreadthFirstSearch(int vertex,vector<vector<int>>&edges){
+	// creation of adjecency list
+	unordered_map<int,list<int>>adjList;
+	for(int i=0;i<edges.size();i++){
+		int u=edges[i][0];
+		int v=edges[i][1];
+		
+		// node connection
+		adjList[u].push_back(v);
+		// for undirected graph
+		adjList[v].push_back(u);
+	}
+	
+	unordered_map<int,bool>visited;
+	vector<int>ans;
+	
+	// check for all node (it means also checking for disconnected graph)
+	for(int i=0;i<vertex;i++){
+		if(!visited[i]){
+			bfs(adjList,visited,ans,i);
+		}
+	}
+	return ans;
+}
+int main(){
+	// taking input from user
+	int vertex,edgeCount;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	cout<<"Enter the number of edgeCount:";
+	cin>>edgeCount;
+	
+	// creation of edges
+	vector<vector<int>>edges(edgeCount,vector<int>(2));
+	cout << "Enter the edges (u v) pairs:\n";
+	for(int i=0;i<edgeCount;i++){
+		cin>>edges[i][0] >> edges[i][1];
+	}
+	
+	// Breadth first search function call
+	vector<int> BFS = BreadthFirstSearch(vertex,edges);
+	// printing BFS 
+	cout<<"Breadth first search:";
+	for(auto i:BFS){
+		cout<<i<<" ";
+	}
+}
+
+
