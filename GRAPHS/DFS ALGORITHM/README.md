@@ -44,7 +44,17 @@ Edges (u v):
      4: [3]
      ```
 
-2. **Depth First Search Process**:
+2. **Graph Visualization**:
+   Here’s a visual representation of the graph based on the input:
+   ```
+       0
+      / \
+     1---2
+     
+     3---4
+   ```
+
+3. **Depth First Search Process**:
    - The algorithm starts at vertex 0.
    - It visits 0, marking it as visited, and adds it to the current component.
    - It then explores the neighbors of 0, starting with 1.
@@ -52,7 +62,7 @@ Edges (u v):
      - Since 2 has no unvisited neighbors, the traversal for this component ends.
    - The first connected component found is `[0, 1, 2]`.
 
-3. **Continuing the Search**:
+4. **Continuing the Search**:
    - The algorithm then checks vertex 1 and 2, but both are already visited.
    - It moves to vertex 3, which is unvisited. It marks 3 as visited and starts a new component.
    - The only neighbor of 3 is 4, which is also unvisited. It visits 4 and completes the second component.
@@ -82,3 +92,20 @@ Depth First Search components are:
 ## Notes
 - The algorithm uses an adjacency list representation for efficient traversal.
 - The program handles cases where the graph may be disconnected, identifying all components.
+
+### Graph Images
+For a better understanding, here are visual representations of the graph components:
+
+**Connected Component 1:**
+```
+       0
+      / \
+     1---2
+```
+
+**Connected Component 2:**
+```
+     3---4
+```
+
+These visualizations help illustrate how DFS identifies connected components within the graph.
