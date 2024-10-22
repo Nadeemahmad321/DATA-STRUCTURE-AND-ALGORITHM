@@ -1,0 +1,75 @@
+// <----------------------------Kosaraju's algorithm--------------------------------->
+#include<bits/stdc++.h>
+using namespace std;
+void topoSort(int node,unordered_map<int, list<int>> &adjList,stack<int>&s,unordered_map<int,bool>&visited){
+	visited[node]=true;
+	for(auto neighbour:adjList[node]){
+		if(!visited[neighbour]){
+			topoSort(neighbour,adjList,s,visited);
+		}
+	}
+	s.push(node);
+}
+void revdfs(int node,unordered_map<int,list<int>>&transpose,unordered_map<int,bool>&visited){
+	visited[node]=true;
+	for(auto neighbour:transpose[node]){
+		if(!visited[neighbour]){
+			revdfs(neighbour,transpose,visited);
+		}
+	}
+}
+int stronglyConnectedComponents(int vertex,vector<vector<int>>&edges){
+	unordered_map<int, list<int>> adjList;
+    for (int i = 0; i < edges.size(); i++) {
+        int u = edges[i][0];
+        int v = edges[i][1];
+        adjList[u].push_back(v);
+    }
+    
+    // topological sort
+    unordered_map<int,bool>visited;
+    stack<int>s;
+    for (int i = 0; i < vertex; i++) {
+        if (!visited[i]) {
+            topoSort(i,adjList,s,visited);
+        }
+    }
+    
+    //create a transpose graph
+    unordered_map<int,list<int>>transpose;
+    for(int i=0;i<vertex;i++){
+    	visited[i]=false;
+    	for(auto neighbour:adjList[i]){
+    		transpose[neighbour].push_back(i);
+		}
+	}
+	int count=0;
+	// dfs call using above oredering
+	while(!s.empty()){
+		int top=s.top();
+		s.pop();
+		if(!visited[top]){
+			count++;
+			revdfs(top,transpose,visited);
+		}
+	}
+	return count;
+}
+int main() {
+    int vertex, edgeCount;
+    cout << "Enter the number of vertices: ";
+    cin >> vertex;
+    cout << "Enter the number of edges: ";
+    cin >> edgeCount;
+
+    vector<vector<int>> edges(edgeCount, vector<int>(2));
+    for (int i = 0; i < edgeCount; i++) {
+        cin >> edges[i][0] >> edges[i][1];
+    }
+
+    int ans=stronglyConnectedComponents(vertex,edges);
+    cout << "Number of strongly connected components: " << ans << endl;
+
+
+    return 0;
+}
