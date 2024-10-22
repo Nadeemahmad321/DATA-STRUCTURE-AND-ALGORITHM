@@ -1,0 +1,65 @@
+// <--------------------------------BELLMAN FORD ALGORITHM---------------------------->
+#include<bits/stdc++.h>
+using namespace std;
+//BELLMAN FORD ALGORITHM
+int bellmanFordAlgorithm(int vertex,vector<vector<int>>&edges,int src,int destination){
+	vector<int>distance(vertex+1,1e9);
+	distance[src]=0;
+	for(int i=1;i<=vertex;i++){
+	    for(int j=0;j<edges.size();j++){
+			int u=edges[j][0];
+			int v=edges[j][1];
+			int weight=edges[j][2];
+			
+			if(distance[u] != 1e9 && (distance[u] + weight) < distance[v]){
+				distance[v]=distance[u] + weight;
+			}
+		}
+	}	
+	//check for negative cycle
+	bool flag=0;
+	for(int j=0;j<edges.size();j++){
+			int u=edges[j][0];
+			int v=edges[j][1];
+			int weight=edges[j][2];
+			
+			if(distance[u] != 1e9 && (distance[u] + weight < distance[v])){
+				flag=1;
+			}
+	}
+	if(flag == 0){
+		return distance[destination];
+	}
+	return -1;	
+}
+int main(){
+	int vertex,edgeCount;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	cout<<"Enter the number of edgeCount:";
+	cin>>edgeCount;
+	
+	// Taking input from user
+	vector<vector<int>>edges(edgeCount,vector<int>(3));
+	cout << "Enter edges (u v w):" << endl;
+	for(int i=0;i<edgeCount;i++){
+		cin>>edges[i][0] >> edges[i][1] >>edges[i][2];
+	}
+	
+	int sourceNode;
+	cout<<"Enter the source:";
+	cin>>sourceNode;
+	
+	int destination;
+	cout<<"Enter the destination:";
+	cin>>destination;
+	
+	// bellman ford algorithm for finding shortest path between two nodes
+	int ans=bellmanFordAlgorithm(vertex,edges,sourceNode,destination);
+    if (ans == -1) {
+        cout << "No path exists or a negative cycle was detected." << endl;
+    } else {
+        cout << "Shortest distance from " << sourceNode << " to " << destination << " is: " << ans << endl;
+    }
+	
+}
