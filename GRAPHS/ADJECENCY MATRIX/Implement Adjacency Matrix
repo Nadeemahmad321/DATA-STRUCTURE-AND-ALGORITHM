@@ -1,0 +1,49 @@
+/* <-------------------------------ADJECENCY MATRIX OF GRAPH------------------------------>*/
+#include<bits/stdc++.h> 
+using namespace std;
+// add edge between nodes
+void addEdge(int u,int v,vector<vector<int>>&adjMatrix){
+	adjMatrix[u][v]=1;
+	adjMatrix[v][u]=1;
+}
+int main(){
+	// Taking input from user
+	// taking number of row
+	int vertex;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	
+	// creation of matrix
+	vector<vector<int>>adjMatrix(vertex,vector<int>(vertex));
+	
+    //initialization process
+    // initialize matrix with zero
+	for(int i=0;i<vertex;i++){
+		for(int j=0;j<vertex;j++){
+			adjMatrix[i][j]=0;
+		}
+	}
+	
+	int edges;
+	cout<<"Enter the nubmer of edges:";
+	cin>>edges;
+	
+	// adding between two nodes 
+	// like edge between u to v
+	cout << "Enter edge (u v):"<<endl;
+	for(int i=0;i<edges;i++){
+		int u,v;
+		cin>> u >> v;
+		addEdge(u,v,adjMatrix);
+	}
+	
+	//adjecency matrix printing
+	cout<<endl<<"Adjecency matrix is:"<<endl;
+	for(int i=0;i<vertex;i++){
+		for(int j=0;j<vertex;j++){
+			cout<<adjMatrix[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	return 0;
+}
