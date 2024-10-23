@@ -1,0 +1,69 @@
+/* <---------------CYCLE DETECTION IN UNDIRECTED GRAPH USING DFS CONCEPT---------------->*/
+#include<bits/stdc++.h>
+using namespace std;
+// main logic of cycle detection using dfs concept
+bool dfsConceptForCycleDetection(unordered_map<int,list<int>>&adjList,unordered_map<int,bool>&visited,int parent,int node){
+	//marking true 
+	visited[node]=true;
+	// check for neighbour
+	for(auto neighbour:adjList[node]){
+		if(!visited[neighbour]){
+			bool cycleDetected = dfsConceptForCycleDetection(adjList,visited,node,neighbour);
+			if(cycleDetected){
+				return true; //cycle is found
+			}
+		}
+		else if(neighbour != parent){
+			return true; // cycle is found
+		}
+	}
+	return false; // cycle is not present
+}
+
+//cycle dectection 
+string cycleDetectionInUndirectedGraph(int vertex,vector<vector<int>>&edges){
+	// creation af adjeceny list
+	unordered_map<int,list<int>>adjList;
+	for(int i = 0;i<edges.size();i++){
+		int u = edges[i][0];
+		int v = edges[i][1];
+		
+		// node connection
+		adjList[u].push_back(v);
+		// for undirected graph
+		adjList[v].push_back(u);
+	}
+	
+	unordered_map<int,bool>visited;
+	
+	// check for all nodes (it means also check for disconnected graph)
+	for(int i = 0;i<vertex;i++){
+		if(!visited[i]){
+			// is cycle present
+			bool ans = dfsConceptForCycleDetection(adjList,visited,-1,i);
+			if(ans == 1){
+				return "YES";
+			}
+		}
+	}
+	return "NO";
+}
+int main(){
+	// taking input from user
+	int vertex,edgeCount;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	cout<<"Enter the number of edgeCount:";
+	cin>>edgeCount; // number of edge
+	
+	//creation of edges;
+	vector<vector<int>>edges(edgeCount,vector<int>(2));
+	cout << "Enter edge (u v):"<<endl;
+	for(int i = 0;i<edgeCount;i++){
+		cin>>edges[i][0] >> edges[i][1];
+	}
+	// Cycle detection function call
+	string ans = cycleDetectionInUndirectedGraph(vertex,edges);
+	//printing yes or no on the basis of cycle present is not
+	cout<<"Cycle is present :"<<ans;
+}
