@@ -1,0 +1,76 @@
+/* <----------------------TOPOLOGICAL SORT USING BFS CONCEPT (KAHN's ALGORITHM)---------------------------->
+
+NOTE:- topological sort is apply on directed acyclic graph 
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+// topological sort
+vector<int> topoLogicalSort(int vertex,vector<vector<int>>&edges){
+	// creation af adjeceny list
+	unordered_map<int,list<int>>adjList;
+	for(int i = 0;i<edges.size();i++){
+		int u = edges[i][0];
+		int v = edges[i][1];
+		
+		// node connection
+		adjList[u].push_back(v); // for directed graph
+	}
+	
+	//finding indegree of all vertex
+	vector<int>indegree(vertex);
+	for(auto i:adjList){
+		for(auto j:i.second){
+			indegree[j]++;
+		}
+	}
+	
+	// creation of queue
+	queue<int>q;
+	// push node that in degree is equal to 0
+	for(int i=0;i<vertex;i++){
+		if(indegree[i] == 0){
+			q.push(i);
+		}
+	}
+	vector<int>ans;
+	
+	//do bfs
+	while(!q.empty()){
+		int frontNode=q.front();
+		q.pop();
+		
+		ans.push_back(frontNode);
+		
+		for(auto neighbour:adjList[frontNode]){
+			indegree[neighbour]--;
+			if(indegree[neighbour] == 0){
+				q.push(neighbour);
+			}
+		}
+	}
+	return ans;
+}
+int main(){
+	// taking input from user
+	int vertex,edgeCount;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	cout<<"Enter the number of edgeCount:";
+	cin>>edgeCount; // number of edge
+	
+	//creation of edges;
+	vector<vector<int>>edges(edgeCount,vector<int>(2));
+	cout << "Enter edge (u v):"<<endl;
+	for(int i = 0;i<edgeCount;i++){
+		cin>>edges[i][0] >> edges[i][1];
+	}
+	// topological sort function
+	vector<int> result = topoLogicalSort(vertex,edges);
+	//printing topological sort
+	cout<<"Topological sort is:";
+	for(auto i:result){
+		cout<<i<<" ";
+	} 
+	return 0;
+}
