@@ -1,0 +1,81 @@
+/* <----------------FINDING SHORTEST PATH BETWEEN SOURCE TO DESTINATION IN UNDIRECTED GRAPH USING BFS CONCEPT----------------->*/
+
+#include<bits/stdc++.h>
+using namespace std;
+// finding shortest path
+vector<int> shortestPathInUndirectedGraph(int vertex,vector<vector<int>>&edges,int src,int terminal){
+	// creation af adjeceny list
+	unordered_map<int,list<int>>adjList;
+	for(int i = 0;i<edges.size();i++){
+		int u = edges[i][0];
+		int v = edges[i][1];
+		
+		// node connection
+		adjList[u].push_back(v); 
+		//for undirected graph
+		adjList[v].push_back(u);
+	}
+
+	unordered_map<int,bool>visited;
+	unordered_map<int,int>parent;
+	
+	//creation of queue
+	queue<int>q;
+	q.push(src);
+	visited[src]=true;
+	parent[src]=-1;
+	
+	while(!q.empty()){
+		int frontNode = q.front();
+		q.pop();
+		
+		for(auto neighbour:adjList[frontNode]){
+			if(!visited[neighbour]){
+				q.push(neighbour);
+				visited[neighbour]=true;
+				parent[neighbour]=frontNode;
+			}
+		}
+	}
+	
+	vector<int>ans;
+	int currNode=terminal;
+	ans.push_back(terminal);
+	while(currNode != src){
+		currNode=parent[currNode];
+		ans.push_back(currNode);
+	}
+	reverse(ans.begin(),ans.end());
+	return ans;
+}
+int main(){
+	// taking input from user
+	int vertex,edgeCount;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	cout<<"Enter the number of edgeCount:";
+	cin>>edgeCount; // number of edge
+	
+	//creation of edges;
+	vector<vector<int>>edges(edgeCount,vector<int>(2));
+	cout << "Enter edge (u v):"<<endl;
+	for(int i = 0;i<edgeCount;i++){
+		cin>>edges[i][0] >> edges[i][1];
+	}
+	
+	// take input from user
+	int sourceNode,terminal;
+	cout<<"Enter the source node:";
+	cin>>sourceNode;
+	cout<<"Enter the terminal:";
+	cin>>terminal;
+	
+	// Shortest path in undirected graph
+	vector<int> ShortPath = shortestPathInUndirectedGraph(vertex,edges,sourceNode,terminal);
+	//printing shortest path
+	cout<<"Shortest path from "<<sourceNode<<" to "<<terminal<<":";
+	for(auto i:ShortPath){
+		cout<<i<<" ";
+	}
+	return 0;
+}
