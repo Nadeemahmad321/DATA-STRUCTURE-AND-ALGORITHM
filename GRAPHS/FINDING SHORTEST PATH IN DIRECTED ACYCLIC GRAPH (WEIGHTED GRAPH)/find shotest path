@@ -1,0 +1,96 @@
+/* <--------------------FINDING SHORTEST PATH IN DIRECTED ACYCLIC GRAPH (WEIGHTED GRAPH)-------------------->*/
+#include<bits/stdc++.h>
+using namespace std;
+// finding topological sort using dfs algorithm
+void dfs(unordered_map<int,list<pair<int,int>>>&adjList,unordered_map<int,bool>&visited,stack<int>&s,int node){
+	//marking node as visited
+	visited[node]=true;
+	//check for all neighbour
+	for(auto neighbour:adjList[node]){
+		if(!visited[neighbour.first]){
+			dfs(adjList,visited,s,neighbour.first);
+		}
+	}
+	s.push(node);	
+}
+// GET SHORTEST PATH FUNCTION
+void getShortestPath(int src,vector<int>&dist,stack<int>&s,unordered_map<int,list<pair<int,int>>>&adjList){
+	//initialize source node
+	dist[src]=0;
+	
+	while(!s.empty()){
+		int top=s.top();
+		s.pop();
+		// updating distance 
+		if(dist[top] != INT_MAX){
+			for(auto i:adjList[top]){
+				if(dist[top] + i.second < dist[i.first]){
+					dist[i.first] = dist[top] + i.second;
+				}
+			}
+		}
+	}
+}
+// finding shortest path from source to destination
+vector<int> findingShortestPath(int vertex,vector<vector<int>>&edges){
+	// creation  of adjecency list
+	unordered_map<int,list<pair<int,int>>>adjList;
+	for(int i=0;i<edges.size();i++){
+		int u=edges[i][0];
+		int v=edges[i][1];
+		int wt=edges[i][2]; // for weight
+		
+		//node connection
+		adjList[u].push_back({v,wt}); // directed graph
+	}
+	
+	// first we need to find topological sort
+	//check for all vertex (it means also check for disconnected graph)
+	stack<int>s;
+	unordered_map<int,bool>visited;
+	for(int i=0;i<vertex;i++){
+		if(!visited[i]){
+			//using dfs concept for finding topological sort
+			dfs(adjList,visited,s,i);
+		}
+	}
+		
+	int sourceNode;
+	cout<<"Enter the source node:";
+	cin>>sourceNode;
+	
+	vector<int>distance(vertex);
+	for(int i=0;i<vertex;i++){
+		distance[i]=INT_MAX;
+	}
+	
+	getShortestPath(sourceNode,distance,s,adjList);
+	return distance;
+	
+}
+int main(){
+	// taking inpu from user
+	int vertex,edgeCount,weight;
+	cout<<"Enter the number of vertex:";
+	cin>>vertex;
+	cout<<"Enter the number of edgeCount:";
+	cin>>edgeCount;
+	
+	//creation of edge
+	vector<vector<int>>edges(edgeCount,vector<int>(3));
+	cout<<"Enter the edge (u v w):"<<endl;
+	for(int i=0;i<edgeCount;i++){
+		cin>>edges[i][0] >> edges[i][1] >> edges[i][2]; // third one is for weight
+	}
+	
+	// shotest path function call
+	vector<int> shortPath = findingShortestPath(vertex,edges);
+
+	
+	// printing shortest path
+	cout<<"shortest is :";
+	for(auto i:shortPath){
+		cout<<i<<" ";
+	}
+	return 0;
+}
