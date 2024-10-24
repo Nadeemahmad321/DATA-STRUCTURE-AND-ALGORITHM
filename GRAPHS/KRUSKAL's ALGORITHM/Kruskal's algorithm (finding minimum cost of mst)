@@ -1,4 +1,4 @@
-// <-----------------------Kruskal's algorithm (finding minimum cost of mst)-------------------->
+// <-----------------------KRUSKAL's ALGORITHM (finding minimum cost of mst)-------------------->
 #include<bits/stdc++.h>
 using namespace std;
 bool cmp(vector<int>&a,vector<int>&b){
