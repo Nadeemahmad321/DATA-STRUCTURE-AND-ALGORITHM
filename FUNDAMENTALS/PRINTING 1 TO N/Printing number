@@ -1,0 +1,28 @@
+/* <--------------------- PRINTING COUNTING --------------------------> */
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter a number you want to print: ";
+    cin >> n;
+
+    // Using a for loop to print numbers from 1 to n
+    cout << "Printing numbers from 1 to " << n << " using a for loop:" << endl;
+    for (int i = 1; i <= n; i++) {
+        cout << i << " ";
+    }
+    cout << endl << endl;
+
+    // Using a while loop to print numbers from 1 to n
+    int i = 1;
+    cout << "Printing numbers from 1 to " << n << " using a while loop:" << endl;
+    while (i <= n) {
+        cout << i << " ";
+        i++;
+    }
+    cout << endl; // Add a final newline for better output formatting
+
+    return 0;
+}
