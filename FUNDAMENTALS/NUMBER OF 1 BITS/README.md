@@ -71,11 +71,8 @@ Enter the number: 5
 Number of 1 bits is: 2
 ```
 
-### Summary of Changes
-- Added a "Brief Explanation" section that describes how the input is processed, how the counting function works, and how the output is generated.
-  
-Feel free to adjust any part of this `README.md` to better match your style or additional details you might want to include!
 
+# important 
 ### What is Bitwise AND?
 
 1. **Bitwise Operator**: The `&` operator is called the bitwise AND operator. It compares each corresponding bit of two numbers and returns a new number.
