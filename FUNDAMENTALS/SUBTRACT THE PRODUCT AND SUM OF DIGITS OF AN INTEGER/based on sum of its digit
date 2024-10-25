@@ -1,0 +1,22 @@
+/*<--------------------SUBTRACT THE PRODUCT AND SUM OF DIGITS OF AN INTEGER---------------------------->*/
+#include<iostream>
+using namespace std;
+int main(){
+	int num;
+	cout<<"Enter a number:";
+	cin>>num;
+	
+	int sum=0;
+	int prod=1;
+	while(num != 0){
+		int digit=num%10;
+		sum+=digit;
+		prod*=digit;
+		num/=10;
+	}
+	cout << "Sum of its digits is: " << sum << endl;
+    cout << "Product of its digits is: " << prod << endl;
+
+    cout << "After subtraction (Product - Sum): " << (prod - sum) << endl;
+    return 0;  
+}
