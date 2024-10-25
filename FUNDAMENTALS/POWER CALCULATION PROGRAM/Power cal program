@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int powerOfNumber(int base, int exponent) {
+    int result = 1;
+    for (int i = 0; i < exponent; i++) {
+        result *= base;
+    }
+    return result;
+}
+
+int main() {
+    int base, exponent;
+    cout << "Enter the base: ";
+    cin >> base;
+    cout << "Enter the exponent (non-negative): ";
+    cin >> exponent;
+
+    // Ensure the exponent is non-negative
+    if (exponent < 0) {
+        cout << "Exponent must be non-negative." << endl;
+        return 1;
+    }
+
+    int pow = powerOfNumber(base, exponent);
+    cout << base << "^" << exponent << " = " << pow << endl;
+
+    return 0;
+}
