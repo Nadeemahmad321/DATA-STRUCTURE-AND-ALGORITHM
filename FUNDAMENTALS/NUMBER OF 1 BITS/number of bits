@@ -1,0 +1,26 @@
+/*<-----------------------------------------NUMBER OF 1 BITS--------------------------------------------->*/
+#include <iostream>
+using namespace std;
+
+int countOnes(int n) {
+    int count = 0;
+    while (n != 0) {
+    	// this statement briefly explained in readme.md
+        if (n & 1) {
+            count++;
+        }
+        // right shift
+        n = n >> 1;
+    }
+    return count;
+}
+
+int main() {
+    int n;
+    cout << "Enter the number : ";
+    cin >> n;
+
+    int count = countOnes(n);
+    cout << "Number of 1 bits is: " << count;
+    return 0;
+}
