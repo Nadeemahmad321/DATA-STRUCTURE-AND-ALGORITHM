@@ -1,0 +1,31 @@
+/*<--------------------------------------FIBONACCI SERIES------------------------------------->*/
+#include <iostream>
+using namespace std;
+
+int main() {
+    int firstTerm = 0;
+    int secondTerm = 1;
+    int thirdTerm;
+
+    int nthTerm;
+    cout << "Enter the term you want: ";
+    cin >> nthTerm;
+
+    if (nthTerm == 1) {
+        cout << "Fibonacci series: " << firstTerm << endl;
+    } else if (nthTerm == 2) {
+        cout << "Fibonacci series: " << firstTerm << ", " << secondTerm << endl;
+    } else {
+        cout << "Fibonacci series: " << firstTerm << ", " << secondTerm;
+        for (int i = 3; i <= nthTerm; i++) {
+            thirdTerm = firstTerm + secondTerm;
+            cout << ", " << thirdTerm;
+            firstTerm = secondTerm;
+            secondTerm = thirdTerm;
+        }
+        
+        cout << endl;
+    }
+
+    return 0;
+}
