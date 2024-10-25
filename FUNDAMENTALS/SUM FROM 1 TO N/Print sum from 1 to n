@@ -1,0 +1,27 @@
+/*<------------------------------------SUM FROM 1 TO N------------------------------------------>*/
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter the number you want to sum: ";
+    cin >> n;
+
+    // Using for loop to calculate the sum from 1 to n
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        sum += i;
+    }
+    cout << "Sum of numbers from 1 to " << n << " is: " << sum << endl << endl;
+
+    // Using while loop to calculate the sum from 1 to n
+    sum = 0;
+    int i = 1;
+    while (i <= n) {
+        sum += i;
+        i++;
+    }
+    cout << "Sum of numbers from 1 to " << n << " is: " << sum << endl;
+
+    return 0;
+}
