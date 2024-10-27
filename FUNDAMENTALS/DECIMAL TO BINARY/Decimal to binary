@@ -1,0 +1,25 @@
+/* <----------------------------------------DECIMAL TO BINARY------------------------------------> */
+#include<iostream>
+#include<cmath> // Include cmath for pow
+using namespace std;
+
+int decimalToBinary(int n) {
+    int ans = 0;
+    int i = 0;
+    while (n != 0) {
+        int bit = n & 1;
+        ans += bit * pow(10, i); // Correct usage of pow
+        n = n >> 1;
+        i++;
+    }
+    return ans;
+}
+
+int main() {
+    int n;
+    cout << "Enter the number: ";
+    cin >> n;
+    int ans = decimalToBinary(n);
+    cout << "Binary representation: " << ans << endl; // Added a message for clarity
+    return 0; // Added return statement for main
+}
