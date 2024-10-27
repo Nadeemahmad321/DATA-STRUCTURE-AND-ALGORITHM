@@ -1,0 +1,22 @@
+/*<--------------------------------- CHECK PROGRAM IS ODD OR EVEN--------------------------------------------->*/
+#include <iostream>
+using namespace std;
+
+bool oddEven(int n) {
+    return n % 2 != 0; // Returns true if n is odd, false if even
+}
+
+int main() {
+    int n;
+    cout << "Enter a number: "; // Corrected typo
+    cin >> n;
+
+    // Check if the function returns true (odd)
+    if (oddEven(n)) {
+        cout << "The number is odd." << endl; // More descriptive output
+    } else {
+        cout << "The number is even." << endl; // More descriptive output
+    }
+
+    return 0;
+}
