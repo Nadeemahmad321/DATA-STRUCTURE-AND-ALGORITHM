@@ -1,0 +1,23 @@
+/*<------------------------------SUM OF THE DIGIT OF A NUMBER----------------------------------->*/
+#include <iostream>
+using namespace std;
+
+// Function to calculate the sum of the digits of a number
+int sumOfDigit(int n) {
+    int sum = 0;
+    while (n != 0) {
+        int digit = n % 10; // Get the last digit
+        sum += digit;       // Add it to the sum
+        n /= 10;           // Remove the last digit
+    }
+    return sum;           // Return the total sum of the digits
+}
+
+int main() {
+    int n;
+    cout << "Enter the number: ";
+    cin >> n;             // Input number
+    int ans = sumOfDigit(n); // Calculate sum of digits
+    cout << "Sum of its digits is: " << ans << endl; // Output result
+    return 0;            // Indicate successful completion
+}
