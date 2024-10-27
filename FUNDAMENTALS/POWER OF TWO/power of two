@@ -1,0 +1,33 @@
+/* <----------------------------- POWER OF TWO -----------------------------------> */
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Function to check if n is a power of two
+bool isPower(int n) {
+    int ans = 1; // Start with 2^0
+    for (int i = 0; i <= 30; i++) {
+        if (ans == n) {
+            return true; // Found a power of two
+        }
+        // Check for overflow before multiplying
+        if (ans < INT_MAX / 2) {
+            ans = ans * 2; // Move to the next power of two
+        }
+    }
+    return false; // No power of two matched
+}
+
+int main() {
+    int n;
+    cout << "Enter the number: ";
+    cin >> n; // Input number
+    // Check if the number is a power of two
+    if (isPower(n)) {
+        cout << "True" << endl; // Output result
+    } else {
+        cout << "False" << endl; // Output result
+    }
+    
+    return 0; // Indicate successful execution
+}
