@@ -1,0 +1,32 @@
+/*<------------------------------------FACTORIAL PROGRAM--------------------------------------->*/
+#include <iostream>
+using namespace std;
+
+int factorial(int n) {
+    if (n < 0) {
+        return -1; // Return -1 for invalid input
+    }
+    
+    int fact = 1; // Start with 1
+    int i = 1; // Initialize i to 1
+
+    while (i <= n) { // Loop until i is greater than n
+        fact *= i; // Multiply i to fact
+        i++; // Increment i
+    }
+    
+    return fact; // Return the computed factorial
+}
+
+int main() {
+    int n;
+    cout << "Enter the number: ";
+    cin >> n;
+    int ans = factorial(n);
+    
+    if (ans == -1) {
+        cout << "Please enter a number that is greater than or equal to 0!" << endl;
+    } else {
+        cout << "Factorial of " << n << " is: " << ans << endl;
+    }
+}
