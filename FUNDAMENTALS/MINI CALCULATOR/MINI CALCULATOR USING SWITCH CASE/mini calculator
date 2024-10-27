@@ -1,0 +1,86 @@
+/* <--------------------------------MINI CALCULATOR------------------------------->*/
+
+#include <iostream>  // Include the iostream library for input and output
+using namespace std; // Use the standard namespace
+
+// Function to add two numbers
+int add(int num_1, int num_2) {
+    return num_1 + num_2; // Return the sum
+}
+
+// Function to subtract the second number from the first
+int subtract(int num_1, int num_2) {
+    return num_1 - num_2; // Return the difference
+}
+
+// Function to multiply two numbers
+int multiply(int num_1, int num_2) {
+    return num_1 * num_2; // Return the product
+}
+
+// Function to perform integer division
+int quotient(int num_1, int num_2) {
+    return num_1 / num_2; // Return the quotient
+}
+
+// Function to calculate the remainder
+int remainder(int num_1, int num_2) {
+    return num_1 % num_2; // Return the remainder
+}
+
+int main() {
+    char cont = 'y'; // Variable to control the continuation of the program
+    while (cont == 'y' || cont == 'Y') { // Loop while the user wants to continue
+        int num_1, num_2; // Variables to store the two numbers
+
+        // Prompt user for the first number
+        cout << "Enter the first number: ";
+        cin >> num_1; // Read the first number
+
+        char op; // Variable to store the operator
+        // Prompt user for the operator
+        cout << "Enter the operator (+ - * / %): ";
+        cin >> op; // Read the operator
+
+        // Prompt user for the second number
+        cout << "Enter the second number: ";
+        cin >> num_2; // Read the second number
+
+        // Check the operator and perform the corresponding operation
+        switch (op) {
+            case '+':
+                cout << "Result: " << add(num_1, num_2) << endl; // Addition
+                break;
+            case '-':
+                cout << "Result: " << subtract(num_1, num_2) << endl; // Subtraction
+                break;
+            case '*':
+                cout << "Result: " << multiply(num_1, num_2) << endl; // Multiplication
+                break;
+            case '/':
+                // Check for division by zero
+                if (num_2 != 0) {
+                    cout << "Result: " << quotient(num_1, num_2) << endl; // Division
+                } else {
+                    cout << "Error: Division by zero!" << endl; // Error for division by zero
+                }
+                break;
+            case '%':
+                // Check for division by zero
+                if (num_2 != 0) {
+                    cout << "Result: " << remainder(num_1, num_2) << endl; // Remainder
+                } else {
+                    cout << "Error: Division by zero!" << endl; // Error for division by zero
+                }
+                break;
+            default:
+                cout << "Error: Enter a valid operator!" << endl; // Error for invalid operator
+                break;
+        }
+
+        // Ask user if they want to perform another calculation
+        cout << "Do you want to perform another calculation? (y/n): ";
+        cin >> cont; // Read user input to decide continuation
+    }
+    return 0; // Exit the program
+}
