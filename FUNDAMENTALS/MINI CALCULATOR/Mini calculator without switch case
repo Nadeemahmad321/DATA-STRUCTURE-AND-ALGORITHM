@@ -1,0 +1,65 @@
+/* <--------------------------------MINI CALCULATOR------------------------------->*/
+#include <iostream>
+using namespace std;
+
+int add(int num_1, int num_2) {
+    return num_1 + num_2;
+}
+
+int subtract(int num_1, int num_2) {
+    return num_1 - num_2;
+}
+
+int multiply(int num_1, int num_2) {
+    return num_1 * num_2;
+}
+
+int quotient(int num_1, int num_2) {
+    return num_1 / num_2;
+}
+
+int remainder(int num_1, int num_2) {
+    return num_1 % num_2;
+}
+
+int main() {
+    char constant = 'y';
+    while (constant == 'y' || constant == 'Y') {
+        int num_1, num_2;
+        cout << "Enter the first number: ";
+        cin >> num_1;
+
+        char op;
+        cout << "Enter the operator (+ - * / %): ";
+        cin >> op;
+
+        cout << "Enter the second number: ";
+        cin >> num_2;
+
+        if (op == '+') {
+            cout << "Result: " << add(num_1, num_2) << endl;
+        } else if (op == '-') {
+            cout << "Result: " << subtract(num_1, num_2) << endl;
+        } else if (op == '*') {
+            cout << "Result: " << multiply(num_1, num_2) << endl;
+        } else if (op == '/') {
+            if (num_2 != 0) {
+                cout << "Result: " << quotient(num_1, num_2) << endl;
+            } else {
+                cout << "Error: Division by zero!" << endl;
+            }
+        } else if (op == '%') {
+            if (num_2 != 0) {
+                cout << "Result: " << remainder(num_1, num_2) << endl;
+            } else {
+                cout << "Error: Division by zero!" << endl;
+            }
+        } else {
+            cout << "Error: Enter a valid operator!" << endl;
+        }
+
+        cout << "Do you want to perform another calculation? (y/n): ";
+        cin >> constant;
+    }
+    return 0;
+}
