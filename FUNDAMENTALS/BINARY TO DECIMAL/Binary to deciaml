@@ -1,0 +1,27 @@
+/* <----------------------------------------BINARY TO DECIMAL---------------------------------------> */
+#include<iostream>
+#include<cmath> // Include cmath for pow
+using namespace std;
+
+int binaryToDecimal(int n) {
+    int ans = 0; // Initialize the decimal result to 0
+    int i = 0;   // Initialize the bit position counter
+    while (n != 0) { // Loop until all bits are processed
+        int digit = n % 10; // Get the last binary digit (rightmost)
+        if(digit == 1) { // Check if the digit is 1
+            ans = (ans + pow(2, i)); // Add 2 raised to the current position index to the result
+        }
+        n /= 10; // Remove the last digit from the binary number
+        i++; // Increment the position index
+    }
+    return ans; // Return the final computed decimal value
+}
+
+int main() {
+    int n;	
+    cout << "Enter the number: "; // Prompt the user for input
+    cin >> n; // Read the binary number from the user
+    int ans = binaryToDecimal(n); // Convert the binary number to decimal
+    cout << "Decimal representation: " << ans << endl; // Output the decimal result
+    return 0; // End of the program
+}
