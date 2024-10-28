@@ -1,0 +1,53 @@
+/*<--------------------------------------------BINARY SEARCH-------------------------------------------------->*/
+#include<iostream> 
+using namespace std; 
+
+// Function to perform binary search on a sorted array
+bool binarySearch(int arr[], int size, int key) {
+    int start = 0; // Initialize the start index of the search range
+    int end = size - 1; // Initialize the end index of the search range
+    int mid = start + (end - start) / 2; // Calculate the middle index
+
+    // Continue searching while the search range is valid
+    while (start <= end) {
+        if (key == arr[mid]) { // Check if the middle element is the key
+            return true; // Key found, return true
+        }
+
+        // If the key is greater than the middle element, search in the right half
+        if (key > arr[mid]) {
+            start = mid + 1; // Move start to the right of mid
+        } else {
+            end = mid - 1; // Otherwise, move end to the left of mid
+        }
+
+        // Recalculate the middle index after updating the search range
+        mid = start + (end - start) / 2;
+    }
+
+    return false; // If the loop exits, the key was not found, return false
+}
+
+int main() {
+    int arr[100]; // Declare an array to hold up to 100 integers
+    int size; // Variable to store the size of the array
+
+    cout << "Enter the size of array : "; // Prompt user for array size
+    cin >> size; // Read the size from user input
+
+    // Loop to read array elements from user
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; // Read each element into the array
+    }
+
+    int key; // Variable to store the element to search for
+    cout << "Enter the element you want to search : "; // Prompt for the key
+    cin >> key; // Read the key from user input
+
+    // Call binarySearch function and check if the key is found
+    if (binarySearch(arr, size, key)) {
+        cout << "Element is found."; // Print found message
+    } else {
+        cout << "Element is not found : "; // Print not found message
+    }
+}
