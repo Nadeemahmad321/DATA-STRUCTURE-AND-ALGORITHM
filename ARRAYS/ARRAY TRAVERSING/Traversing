@@ -1,0 +1,38 @@
+/* <------------------------------------------TRAVERSING ARRAY----------------------------------------------> */
+#include <iostream> 
+using namespace std; 
+
+// Function to traverse and print the array
+void traversingArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " "; // Print each element
+    }
+    cout << endl; // Newline for better formatting
+}
+
+int main() {
+    // Declaration of array and size variable
+    int arr[100]; // Array to hold up to 100 integers
+    int size; // Variable to store the size of the array
+
+    // Prompt user to enter the size of the array
+    cout << "Enter the size of the array: ";
+    cin >> size; // Read size from user
+
+    // Input validation for array size
+    if (size <= 0 || size > 100) {
+        cout << "Invalid size. Please enter a size between 1 and 100." << endl; // Inform the user if the size is invalid
+        return 1; // Exit the program with an error code
+    }
+
+    // Prompt user to enter the elements of the array
+    cout << "Enter the elements of the array: " << endl;
+    // Loop to read elements into the array
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; // Read each element into the array
+    }
+    
+    cout << "Elements of the array are: ";
+    traversingArray(arr, size); // Array traversing
+    return 0; 
+}
