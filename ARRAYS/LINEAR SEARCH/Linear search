@@ -1,0 +1,54 @@
+/* <------------------------------------------LINEAR SEARCH----------------------------------------------> */
+
+#include <iostream> // Include the iostream library for input/output operations
+using namespace std; // Use the standard namespace to avoid prefixing with std::
+
+// Function to perform linear search
+// Takes an array, its size, and the key to search for
+bool linearSearch(int arr[], int size, int key) {
+    // Loop through each element of the array
+    for (int i = 0; i < size; i++) {
+        // If the current element matches the key
+        if (arr[i] == key) {
+            return true; // Element found, return true
+        }
+    }
+    return false; // Element not found, return false
+}
+
+int main() {
+    // Declaration of array and size variable
+    int arr[100]; // Array to hold up to 100 integers
+    int size; // Variable to store the size of the array
+
+    // Prompt user to enter the size of the array
+    cout << "Enter the size of the array: ";
+    cin >> size; // Read size from user
+
+    // Input validation for array size
+    if (size <= 0 || size > 100) {
+        cout << "Invalid size. Please enter a size between 1 and 100." << endl; // Inform the user if the size is invalid
+        return 1; // Exit the program with an error code
+    }
+
+    // Prompt user to enter the elements of the array
+    cout << "Enter the elements of the array: "<<endl;
+    // Loop to read elements into the array
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; // Read each element into the array
+    }
+
+    // Prompt user to enter the key element to search for
+    int key; // Variable to hold the key to be searched
+    cout << "Enter the element you want to search: ";
+    cin >> key; // Read the key from user
+
+    // Function call to perform the search
+    if (linearSearch(arr, size, key)) {
+        cout << "Element is found." << endl; // If found, notify the user
+    } else {
+        cout << "Element is not found." << endl; // If not found, notify the user
+    }
+
+    return 0; // Return 0 to indicate successful execution of the program
+}
