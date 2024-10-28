@@ -1,0 +1,69 @@
+/* <-------------------------------FIND MINIMUM AND MAXIMUM ELEMENT OF ARRAY-----------------------------------> */
+#include <iostream> 
+using namespace std; 
+
+// Function to traverse and print the array
+void traversingArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " "; // Print each element
+    }
+    cout << endl; // Newline for better formatting
+}
+
+// find minimum element from array 
+int minimumElementOfArray(int arr[],int size){
+	int mini=INT_MAX;
+	for(int i=0;i<size;i++){
+		if(mini > arr[i]){
+			mini = arr[i];
+		}
+	}
+	return mini;
+}
+
+// find maximum element from array
+int maximumElementOfArray(int arr[],int size){
+	int maxi = INT_MIN;
+	for(int i=0;i<size;i++){
+		if(maxi < arr[i]){
+			maxi = arr[i];
+		}
+	}
+	return maxi;
+}
+
+
+int main() {
+    // Declaration of array and size variable
+    int arr[100]; // Array to hold up to 100 integers
+    int size; // Variable to store the size of the array
+
+    // Prompt user to enter the size of the array
+    cout << "Enter the size of the array: ";
+    cin >> size; // Read size from user
+
+    // Input validation for array size
+    if (size <= 0 || size > 100) {
+        cout << "Invalid size. Please enter a size between 1 and 100." << endl; // Inform the user if the size is invalid
+        return 1; // Exit the program with an error code
+    }
+
+    // Prompt user to enter the elements of the array
+    cout <<endl<<"Enter the elements of the array: " << endl;
+    // Loop to read elements into the array
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; // Read each element into the array
+    }
+    
+    cout << "Elements of the array : ";
+    traversingArray(arr, size); // Array traversing
+    
+    // find minimum
+    int mini = minimumElementOfArray(arr,size);
+    cout<<endl<<"Minimum element of array : "<<mini<<endl<<endl;
+    
+    int maxi = maximumElementOfArray(arr,size);
+    cout<<"Maximum element of array : "<<maxi<<endl<<endl;
+    
+    return 0; 
+}
