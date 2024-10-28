@@ -1,0 +1,39 @@
+/*<-------------------------------------SWAP ALTERNATE IN ARRAY-------------------------------------------->*/
+#include <iostream>  
+using namespace std; 
+
+// Function to swap elements in pairs in the array
+void alternateSwap(int arr[], int size) {
+    // Loop through the array, incrementing by 2 to access pairs
+    for (int i = 0; i < size; i += 2) {
+        // Check if the next element exists to avoid out-of-bounds access
+        if (i + 1 < size) {
+            swap(arr[i], arr[i + 1]); // Swap elements at index i and i + 1
+        }
+    }
+    
+    // Print the modified array after swapping
+    cout << " Printing modified array : ";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " "; // Output each element followed by a space
+    }
+    cout << endl; // Print a newline for better output formatting
+}
+
+int main() {
+    int arr[100]; // Declare an array of size 100 to store elements
+    int size; // Variable to store the size of the array
+
+    cout << "Enter the size of array: "; 
+    cin >> size; // Read the size from user input
+
+    cout << "Enter the elements of the array: "; 
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; 
+    }
+
+    // Call the function to swap elements in the array
+    alternateSwap(arr, size);
+
+    return 0; 
+}
