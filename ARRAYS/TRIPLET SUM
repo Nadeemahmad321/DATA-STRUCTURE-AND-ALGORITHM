@@ -1,0 +1,46 @@
+/* <---------------------------------------------TRIPLET SUM------------------------------------------------------> */
+#include <iostream>
+using namespace std;
+
+// Function to find and print triplets that sum up to a given key
+void tripletSum(int arr[], int size, int targetSum) {
+    // Loop through each element of the array
+    for (int i = 0; i < size - 2; i++) {
+        // Loop through the elements following the current element
+        for (int j = i + 1; j < size - 1; j++) {
+            for (int k = j + 1; k < size; k++) {
+                // Check if the sum of the three elements equals the targetSum
+                if (arr[i] + arr[j] + arr[k] == targetSum) {
+                    // Print the triplet
+                    cout << "(" << arr[i] << ", " << arr[j] << ", " << arr[k] << ")\n";
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[100]; 
+    int size; 
+
+    // Prompt user for the size of the array
+    cout << "Enter the size of array: ";
+    cin >> size;
+
+    // Prompt user to input the elements of the array
+    cout << "Enter the elements of array: ";
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; // Store each element in the array
+    }
+
+    int targetSum; // Variable to hold the target sum
+    // Prompt user for the key (target sum)
+    cout << "Enter the key: ";
+    cin >> targetSum;
+
+    // Call the triplet sum function and display the results
+    cout << "Triplet sums are:\n";
+    tripletSum(arr, size, targetSum);
+
+    return 0; 
+}
