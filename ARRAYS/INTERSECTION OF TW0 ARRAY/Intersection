@@ -1,0 +1,64 @@
+/*<-------------------------------------------INTERSECTION------------------------------------------------->*/
+#include <bits/stdc++.h> 
+using namespace std;
+
+// Function to find the intersection of two sorted vectors
+vector<int> intersection(vector<int> a, vector<int> b) {
+    vector<int> ans; // Vector to store the intersection results
+    int i = 0, j = 0; 
+
+    // Sort both input vectors to ensure they are in order
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+
+    // Loop until we reach the end of either vector
+    while (i < a.size() && j < b.size()) {
+        if (a[i] == b[j]) { // If elements are equal, we have a common element
+            // Check if this element is not already in the result (to avoid duplicates)
+            if (ans.empty() || ans.back() != a[i]) {
+                ans.push_back(a[i]); // Add to the intersection result
+            }
+            i++; // Move to the next element in both vectors
+            j++;
+        } else if (a[i] < b[j]) { // If the current element in a is smaller, move pointer i
+            i++;
+        } else { // If the current element in b is smaller, move pointer j
+            j++;
+        }
+    }
+    return ans; 
+}
+
+int main() {
+    int aSize, bSize; // Variables to store the sizes of the vectors
+    cout << "Enter the size of a vector: ";
+    cin >> aSize; // Input size for vector a
+    cout << "Enter the size of b vector: ";
+    cin >> bSize; // Input size for vector b
+
+    // Initialize vector a with the given size
+    vector<int> a(aSize);
+    cout << "Enter elements of vector a: ";
+    for (int i = 0; i < aSize; i++) {
+        cin >> a[i]; // Input elements for vector a
+    }
+    
+    // Initialize vector b with the given size
+    vector<int> b(bSize);
+    cout << "Enter elements of vector b: ";
+    for (int i = 0; i < bSize; i++) {
+        cin >> b[i]; // Input elements for vector b
+    }
+
+    // Call the intersection function and store the result
+    vector<int> ans = intersection(a, b);
+    
+    // Output the intersection result
+    cout << "Intersection of the two arrays is: ";
+    for (int i = 0; i < ans.size(); i++) {
+        cout << ans[i] << " "; // Print each element in the intersection
+    }
+    cout << endl; 
+
+    return 0; 
+}
