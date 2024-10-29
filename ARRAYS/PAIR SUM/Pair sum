@@ -37,7 +37,7 @@ int main() {
 
     int targetSum; // Variable to hold the target sum
     // Prompt user for the key (target sum)
-    cout << "Enter the key: ";
+    cout << "Enter the target: ";
     cin >> targetSum;
 
     // Call the pair sum function and display the results
