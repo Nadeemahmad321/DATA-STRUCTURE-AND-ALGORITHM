@@ -1,0 +1,48 @@
+/* <-----------------------------------------FIND DUPLICATE------------------------------------------> */
+#include <iostream>
+using namespace std;
+
+// Function to find duplicate element from array using XOR operation
+int findDuplicate(int arr[], int size) {
+    int ans = 0; // Initialize the result
+    
+    // XOR all the elements in the array
+    for (int i = 0; i < size; i++) {
+        ans ^= arr[i]; // XOR each element
+    }
+    
+    // XOR with numbers from 0 to size - 2 (because of the duplicate)
+    for (int i = 0; i < size - 1; i++) {
+        ans ^= i; 
+    }
+    
+    return ans; 
+}
+
+int main() {
+    int arr[100]; 
+    int size; 
+
+    // Prompt user for the size of the array
+    cout << "Enter the size of the array (should be >= 2): ";
+    cin >> size;
+
+    // Check if the size is valid
+    if (size < 2) {
+        cout << "Array size must be at least 2." << endl;
+        return 1; // Exit with error code
+    }
+
+    // Prompt user to input the elements of the array
+    cout << "Enter the elements of the array (values should be from 0 to " << size - 2 << "): ";
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; 
+    }
+
+    // Call the find duplicate function and display the result
+    int ans = findDuplicate(arr, size);
+    cout << "Duplicate element in the array is: " << ans << endl;
+
+    return 0; 
+}
+
