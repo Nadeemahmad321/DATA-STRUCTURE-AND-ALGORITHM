@@ -1,0 +1,68 @@
+/* <-------------------------------------ADDITION OF TWO MATRICES----------------------------------------->*/
+#include <iostream> 
+#include <vector>   
+using namespace std;
+
+/* Function to print the resulting matrix */
+void print(vector<vector<int>> ans, int row, int col) {
+    // Iterate through each row
+    for (int i = 0; i < row; i++) {
+        // Iterate through each column in the current row
+        for (int j = 0; j < col; j++) {
+            cout << ans[i][j] << " "; // Print the element
+        }
+        cout << endl; // Print a new line after each row
+    }
+}
+
+/* Function to add two matrices a and b */
+void matrixAddition(vector<vector<int>>& a, vector<vector<int>>& b, int row, int col) {
+    // Create a new matrix to store the result with the same dimensions
+    vector<vector<int>> ans(row, vector<int>(col));
+    // Iterate through each element of the matrices
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            ans[i][j] = a[i][j] + b[i][j]; // Add corresponding elements
+        }
+    }
+    cout << endl; // Print a new line before showing the result
+    cout << "After the addition:" << endl;
+    print(ans, row, col); // Call the print function to display the result
+}
+
+int main() {
+    
+    int row;
+    cout << "Enter the row size: ";
+    cin >> row;
+    
+   
+    int col;
+    cout << "Enter the column size: ";
+    cin >> col; 
+
+    // Initialize the first matrix a with user-specified dimensions
+    vector<vector<int>> a(row, vector<int>(col));
+    // Prompt the user to enter the elements of matrix a
+    cout << "Enter the elements of vector a: " << endl;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            cin >> a[i][j]; // Read each element of matrix a
+        }
+    }
+    
+    // Initialize the second matrix b with user-specified dimensions
+    vector<vector<int>> b(row, vector<int>(col));
+    // Prompt the user to enter the elements of matrix b
+    cout << "Enter the elements of vector b: " << endl;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            cin >> b[i][j]; // Read each element of matrix b
+        }
+    }
+    
+    // Call the matrixAddition function to add matrices a and b
+    matrixAddition(a, b, row, col);
+    
+    return 0;
+}
