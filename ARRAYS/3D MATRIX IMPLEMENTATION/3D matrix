@@ -1,0 +1,45 @@
+/*<--------------------------------------3D MATRIX IMPLEMENTATION----------------------------------------->*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void print(const vector<vector<vector<int>>>& matrix, int row, int col, int page) {
+    for (int i = 0; i < row; i++) {
+        cout << "Page " << i << ":" << endl;
+        for (int j = 0; j < row; j++) {
+            for (int k = 0; k < col; k++) {
+                cout << matrix[i][j][k] << " ";
+            }
+            cout << endl;
+        }
+        cout << endl; // Add space between pages
+    }
+}
+
+int main() {
+    int row;
+    cout << "Enter the number of rows: ";
+    cin >> row;
+
+    int col;
+    cout << "Enter the number of columns: ";
+    cin >> col;
+    
+    int page;
+    cout << "Enter the number of pages: ";
+    cin >> page;
+
+    vector<vector<vector<int>>> matrix(row, vector<vector<int>>(col, vector<int>(page)));
+    cout << "Enter the elements of the matrix:" << endl;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            for (int k = 0; k < page; k++) {
+                cin >> matrix[i][j][k];
+            }
+        }
+    }
+    
+    cout << "3D matrix implementation: " << endl;
+    print(matrix, row, col, page);
+    return 0;
+}
