@@ -1,0 +1,54 @@
+/* <----------------------------------------SORT 0's 1's------------------------------------------------->*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to print the elements of the array
+void print(const vector<int>& arr) {
+    for (int i = 0; i < arr.size(); i++) {
+        cout << arr[i] << " ";  // Print each element followed by a space
+    }
+    cout << endl;  // Newline for better output formatting
+}
+
+// Function to sort an array containing only 0s and 1s
+void sorting(vector<int>& arr) {
+    int i = 0;  // Pointer to traverse from the start (0s)
+    int j = arr.size() - 1;  // Pointer to traverse from the end (1s)
+
+    // Loop until the two pointers meet
+    while (i < j) {
+        // Increment i while arr[i] is 0
+        while (i < arr.size() && arr[i] == 0) {
+            i++;  // Move forward to find a 1
+        }
+        // Decrement j while arr[j] is 1
+        while (j >= 0 && arr[j] == 1) {
+            j--;  // Move backward to find a 0
+        }
+
+        // If i is still less than j, swap the elements at these indices
+        if (i < j) {
+            swap(arr[i], arr[j]);  // Swap the found 1 and 0
+        }
+    }
+}
+
+int main() {
+    int size;  // Variable to store the size of the array
+    cout << "Enter the size of the vector: ";
+    cin >> size;  // Read the size of the vector
+
+    vector<int> arr(size);  // Initialize the vector with the specified size
+    cout << "Enter the elements of the array (0s and 1s only): " << endl;
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i];  // Read each element of the array
+    }
+
+    sorting(arr);  // Call the sorting function to sort the array
+    
+    cout << "After sorting: ";
+    print(arr); 
+
+    return 0; 
+}
