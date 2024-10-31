@@ -1,0 +1,78 @@
+/* <------------------------------MERGE TWO SORTED ARRAY USING THIRD ARRAY---------------------------------->*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to merge two sorted arrays
+vector<int> mergeTwoSortedArray(const vector<int>& a, const vector<int>& b) {
+    // Initialize an empty vector to hold the merged result
+    vector<int> ans;
+    
+    // Use two indices to track the current position in each array
+    int i = 0, j = 0;
+
+    // Continue merging until one of the arrays is fully traversed
+    while (i < a.size() && j < b.size()) {
+        // Compare current elements of both arrays
+        if (a[i] < b[j]) {
+            // If a[i] is smaller, add it to the result and move the index i
+            ans.push_back(a[i++]);
+        } else {
+            // If b[j] is smaller or equal, add it to the result and move the index j
+            ans.push_back(b[j++]);
+        }
+    }
+
+    // If there are remaining elements in array a, add them to the result
+    while (i < a.size()) {
+        ans.push_back(a[i++]);
+    }
+
+    // If there are remaining elements in array b, add them to the result
+    while (j < b.size()) {
+        ans.push_back(b[j++]);
+    }
+
+    // Return the merged array
+    return ans;
+}
+
+int main() {
+    // Declare size for the first vector
+    int sizeA;
+    cout << "Enter the size of vector a: ";
+    cin >> sizeA; // User inputs the size
+    
+    // Initialize the first vector with the specified size
+    vector<int> a(sizeA);
+    cout << "Enter the elements of vector a (sorted): ";
+    // User inputs the sorted elements for vector a
+    for (int i = 0; i < sizeA; i++) {
+        cin >> a[i];
+    }
+    
+    // Declare size for the second vector
+    int sizeB;
+    cout << "Enter the size of vector b: ";
+    cin >> sizeB; // User inputs the size
+    
+    // Initialize the second vector with the specified size
+    vector<int> b(sizeB);
+    cout << "Enter the elements of vector b (sorted): ";
+    // User inputs the sorted elements for vector b
+    for (int i = 0; i < sizeB; i++) {
+        cin >> b[i];
+    }
+    
+    // Call the function to merge the two sorted arrays
+    vector<int> ans = mergeTwoSortedArray(a, b);
+    
+    // Output the merged array
+    cout << "Merged vector: ";
+    for (int i = 0; i < ans.size(); i++) {
+        cout << ans[i] << " "; // Print each element of the merged vector
+    }
+    cout << endl; // Print a newline for better formatting
+
+    return 0; // Indicate that the program ended successfully
+}
