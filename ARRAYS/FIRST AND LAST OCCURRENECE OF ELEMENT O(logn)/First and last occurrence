@@ -1,0 +1,92 @@
+/*<-------------------------------------FIRST AND LAST OCCURRENECE OF ELEMENT----------------------------------------------->
+NOTE :Complexity is O(logn) */
+// second method 
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to find the first occurrence of a key in a sorted array
+int firstOccurrence(const vector<int>& arr, int key) {
+    int start = 0; // Starting index of the array
+    int end = arr.size() - 1; // Ending index of the array
+    int ans = -1; // Variable to store the index of the first occurrence
+
+    // Continue searching while the start index is less than or equal to the end index
+    while (start <= end) {
+        int mid = start + (end - start) / 2; // Calculate the mid index
+        
+        // Check if the middle element is equal to the key
+        if (arr[mid] == key) {
+            ans = mid; // Update ans with the current mid index
+            end = mid - 1; // Move to the left half to find earlier occurrence
+        } 
+        // If the middle element is greater than the key, search the left half
+        else if (arr[mid] > key) {
+            end = mid - 1;
+        } 
+        // If the middle element is less than the key, search the right half
+        else {
+            start = mid + 1;
+        }
+    }
+    return ans; // Return the index of the first occurrence (or -1 if not found)
+}
+
+// Function to find the last occurrence of a key in a sorted array
+int lastOccurrence(const vector<int>& arr, int key) {
+    int start = 0; // Starting index of the array
+    int end = arr.size() - 1; // Ending index of the array
+    int ans = -1; // Variable to store the index of the last occurrence
+
+    // Continue searching while the start index is less than or equal to the end index
+    while (start <= end) {
+        int mid = start + (end - start) / 2; // Calculate the mid index
+        
+        // Check if the middle element is equal to the key
+        if (arr[mid] == key) {
+            ans = mid; // Update ans with the current mid index
+            start = mid + 1; // Move to the right half to find later occurrence
+        } 
+        // If the middle element is greater than the key, search the left half
+        else if (arr[mid] > key) {
+            end = mid - 1;
+        } 
+        // If the middle element is less than the key, search the right half
+        else {
+            start = mid + 1;
+        }
+    }
+    return ans; // Return the index of the last occurrence (or -1 if not found)
+}
+
+int main() {
+    int size; 
+    cout << "Enter the size of vector: ";
+    cin >> size;
+    
+    // Check for valid vector size
+    if (size <= 0) {
+        cout << "Invalid size." << endl; // Error message for invalid size
+        return 1; // Exit program with error code
+    }
+
+    vector<int> arr(size); // Declare a vector of the specified size
+    cout << "Enter the elements of vector: ";
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; // Input elements into the vector
+    }
+
+    int key; // Variable to store the key to be searched
+    cout << "Enter the key: ";
+    cin >> key; // Input the key
+
+    // Call functions to find the first and last occurrences of the key
+    int first = firstOccurrence(arr, key);
+    int last = lastOccurrence(arr, key);
+
+    // Output the results
+    cout << "First occurrence is at index: " << first << endl;
+    cout << "Last occurrence is at index: " << last << endl;
+
+    return 0; // Indicate successful completion of the program
+}
