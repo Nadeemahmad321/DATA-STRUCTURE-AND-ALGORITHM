@@ -1,0 +1,39 @@
+/*<---------------------------------------NUMBER OF OCCURENCE OF ELEMENT-------------------------------------->*/
+#include<iostream>
+#include<vector>
+using namespace std;
+
+// Function to count occurrences of a specific element (key) in an array
+int numberOfOccurence(vector<int>& arr, int key) {
+    int count = 0; // Initialize a counter to zero
+    // Iterate through the array
+    for (int i = 0; i < arr.size(); i++) {
+        // If the current element matches the key, increment the count
+        if (arr[i] == key) {
+            count++;
+        }
+    }
+    return count; // Return the total count of occurrences
+}
+
+int main() {
+    int size; 
+    cout << "Enter the size of arr: "; 
+    cin >> size; 
+    
+    vector<int> arr(size); // Create a vector of the specified size
+    cout << "Enter the element of array: "; // Prompt user to enter array elements
+    // Loop to read elements into the array
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i]; 
+    }
+    
+    int key; 
+    cout << "Enter the key element: "; 
+    cin >> key; 
+    
+    // Call the function to count occurrences of the key and store the result
+    int ans = numberOfOccurence(arr, key);
+    // Output the result to the user
+    cout << "Number of occurrence of element: " << ans << endl;
+}
